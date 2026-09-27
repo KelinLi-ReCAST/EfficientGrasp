@@ -1,0 +1,72 @@
+# ---------------------------------------------------------------------------
+# GitHub holds code, URDFs and a few figures only.
+# Datasets, trained models, meshes, logs and result videos are distributed
+# separately (HuggingFace) — see README.md, section "Data and models".
+# ---------------------------------------------------------------------------
+
+# Python / editor
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+*.so
+*.egg-info/
+
+# Datasets, arrays, MATLAB exports
+*.npy
+*.npz
+*.mat
+*.h5
+*.hdf5
+
+# Trained models / checkpoints
+*.pt
+*.pth
+*.pkl
+*.ckpt
+*.ckpt.*
+checkpoint
+log/
+logs/
+events.out.tfevents*
+
+# Whole data / model directories
+gripper_representation/data/
+gripper_representation/feature_extraction/coupRotWorkspaceArrays/
+gripper_representation/feature_extraction/ruthArrays/
+gripper_representation/feature_extraction/saved_models/
+contact_point_selection/UniGrasp/data/
+contact_point_selection/UniGrasp/saved_models/
+grasp_quality/data/
+grasp_quality/utils/manopth/mano/models/
+third_party/
+results/rl_ik_error/
+results/pssn_accuracy/
+results/videos/
+
+# Meshes, CAD, archives (kept on HuggingFace; URDF text files stay in git)
+*.stl
+*.STL
+*.dae
+*.DAE
+*.blend
+*.tif
+*.tiff
+*.obj
+*.mtl
+*.ply
+*.SLDPRT
+*.SLDASM
+*.zip
+*.tar.xz
+**/barrett_model/cad/
+**/barrett_model/doc/
+
+# Media: ignore everything, then whitelist the figures/videos that belong to the paper
+*.png
+*.jpg
+*.jpeg
+*.mp4
+!evaluation/real_world/object_photos/*.png
+!evaluation/real_world/occlusion/*.png
+!evaluation/real_world/occlusion/*.mp4
+!rl_inverse_kinematics/revision_lr_ablation/*.png

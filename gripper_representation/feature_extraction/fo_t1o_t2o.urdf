@@ -1,0 +1,742 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-1-g15f4949  Build Version: 1.6.7594.29634
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="fo_t1o_t2o">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="0.127077766283005 -0.0191621330302985 0.1384522158111"
+        rpy="0 0 0" />
+      <mass
+        value="0.2034522422309" />
+      <inertia
+        ixx="0.000374416249530274"
+        ixy="-1.93330020521375E-06"
+        ixz="-5.95746646598713E-07"
+        iyy="0.000346388296121358"
+        iyz="9.53964135617314E-06"
+        izz="0.000638064486414968" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="/home/kelin/workspace_xian/meshes/RUTH/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="/home/kelin/workspace_xian/meshes/RUTH/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="Link_1">
+    <inertial>
+      <origin
+        xyz="-0.000187923633239273 0.00754176122926581 -0.00980027136883931"
+        rpy="0 0 0" />
+      <mass
+        value="0.010695429029822" />
+      <inertia
+        ixx="1.78417641476002E-06"
+        ixy="6.07711431496885E-09"
+        ixz="-2.10333901245583E-08"
+        iyy="2.01750832123323E-06"
+        iyz="3.16794505531986E-07"
+        izz="6.87451535040714E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="/home/kelin/workspace_xian/meshes/RUTH/Link_1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.694117647058824 0.0980392156862745 0.0980392156862745 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="/home/kelin/workspace_xian/meshes/RUTH/Link_1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint_Link_1"
+    type="continuous">
+    <origin
+      xyz="0.162253409707917 0.00694554989225301 0.16999798542261"
+      rpy="1.5707963267949 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link_1" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="Link_2">
+    <inertial>
+      <origin
+        xyz="-0.0138135428067241 0.00298913196610298 0.0240105208068492"
+        rpy="0 0 0" />
+      <mass
+        value="0.00811557698475648" />
+      <inertia
+        ixx="4.25322686853845E-06"
+        ixy="-1.08111097838658E-07"
+        ixz="2.26874138221039E-06"
+        iyy="5.77733675951074E-06"
+        iyz="1.87934000565209E-07"
+        izz="1.61478516613203E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="/home/kelin/workspace_xian/meshes/RUTH/Link_2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.694117647058824 0.0980392156862745 0.0980392156862745 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="/home/kelin/workspace_xian/meshes/RUTH/Link_2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint_Link_2"
+    type="continuous">
+    <origin
+      xyz="-0.000479414092727837 0.0198000000000232 -0.0249954028198589"
+      rpy="0 0 0" />
+    <parent
+      link="Link_1" />
+    <child
+      link="Link_2" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="Phal_1A">
+    <inertial>
+      <origin
+        xyz="-0.00260088800989508 0.011750673907989 0.00179472947998166"
+        rpy="0 0 0" />
+      <mass
+        value="0.00785370440843467" />
+      <inertia
+        ixx="8.50492812698145E-07"
+        ixy="-4.13468937935882E-08"
+        ixz="1.85366250803846E-08"
+        iyy="6.74699572383312E-07"
+        iyz="2.85300508181348E-08"
+        izz="8.64570128956739E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="/home/kelin/workspace_xian/meshes/RUTH/Phal_1A.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.501960784313725 0.501960784313725 0.501960784313725 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="/home/kelin/workspace_xian/meshes/RUTH/Phal_1A.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint_Phal_1A"
+    type="continuous">
+    <origin
+      xyz="0 0.0119999999999758 0"
+      rpy="0 0 0" />
+    <parent
+      link="Link_2" />
+    <child
+      link="Phal_1A" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="Phal_1B">
+    <inertial>
+      <origin
+        xyz="0.0134852746294539 -0.00600000115335093 -0.0195859740236098"
+        rpy="0 0 0" />
+      <mass
+        value="0.0131173795655164" />
+      <inertia
+        ixx="1.90609045955136E-06"
+        ixy="-9.15188021816497E-13"
+        ixz="9.4826587638495E-07"
+        iyy="2.47473734069647E-06"
+        iyz="2.76494244931332E-12"
+        izz="1.3565845573442E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="/home/kelin/workspace_xian/meshes/RUTH/Phal_1B.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.501960784313725 0.501960784313725 0.501960784313725 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="/home/kelin/workspace_xian/meshes/RUTH/Phal_1B.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint_Phal_1B"
+    type="continuous">
+    <origin
+      xyz="0.00340767190319957 0.0280000000000004 0.00493839773612305"
+      rpy="1.5707963267949 0.60400732294275 0" />
+    <parent
+      link="Phal_1A" />
+    <child
+      link="Phal_1B" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="Phal_1C">
+    <inertial>
+      <origin
+        xyz="0.0204881024017285 0.00999998621210764 -0.0101652135968892"
+        rpy="0 0 0" />
+      <mass
+        value="0.0104117778177504" />
+      <inertia
+        ixx="7.67903686259961E-07"
+        ixy="-4.64293384758153E-12"
+        ixz="3.65371728421367E-07"
+        iyy="1.59525152823906E-06"
+        iyz="-5.56566530919262E-12"
+        izz="1.5080946931961E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="/home/kelin/workspace_xian/meshes/RUTH/Phal_1C.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.501960784313725 0.501960784313725 0.501960784313725 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="/home/kelin/workspace_xian/meshes/RUTH/Phal_1C.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint_Phal_1C"
+    type="continuous">
+    <origin
+      xyz="0.0285000000000007 -0.016 -0.0380000000000002"
+      rpy="0 0 0" />
+    <parent
+      link="Phal_1B" />
+    <child
+      link="Phal_1C" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="Link_3">
+    <inertial>
+      <origin
+        xyz="-0.000112780843170915 0.00754176120315014 -0.00980142468643873"
+        rpy="0 0 0" />
+      <mass
+        value="0.0106954293118209" />
+      <inertia
+        ixx="1.78443456120267E-06"
+        ixy="3.64812776967332E-09"
+        ixz="-1.26226659809363E-08"
+        iyy="2.01750841858949E-06"
+        iyz="3.16831783620607E-07"
+        izz="6.87193441288354E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="/home/kelin/workspace_xian/meshes/RUTH/Link_3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.694117647058824 0.0980392156862745 0.0980392156862745 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="/home/kelin/workspace_xian/meshes/RUTH/Link_3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint_Link_3"
+    type="continuous">
+    <origin
+      xyz="0.0922534097079193 0.00694554989226086 0.169997985422611"
+      rpy="1.5707963267949 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link_3" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="Link_4">
+    <inertial>
+      <origin
+        xyz="0.0138641298734584 -0.00302765430433155 0.0241035866387443"
+        rpy="0 0 0" />
+      <mass
+        value="0.00851266701882223" />
+      <inertia
+        ixx="4.46118650304313E-06"
+        ixy="-1.21284502056355E-07"
+        ixz="-2.38276143272935E-06"
+        iyy="6.05231136866237E-06"
+        iyz="-2.10860077760737E-07"
+        izz="1.68915815075787E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="/home/kelin/workspace_xian/meshes/RUTH/Link_4.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.694117647058824 0.0980392156862745 0.0980392156862745 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="/home/kelin/workspace_xian/meshes/RUTH/Link_4.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint_Link_4"
+    type="continuous">
+    <origin
+      xyz="-0.000287765960723788 0.0298000000000026 -0.0249983437601095"
+      rpy="0 0 0" />
+    <parent
+      link="Link_3" />
+    <child
+      link="Link_4" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="Phal_2A">
+    <inertial>
+      <origin
+        xyz="0.00274509085280261 0.0117506765143697 0.00156528921664004"
+        rpy="0 0 0" />
+      <mass
+        value="0.00785370644140929" />
+      <inertia
+        ixx="8.47436576789227E-07"
+        ixy="4.36382428325315E-08"
+        ixz="-1.70657669057543E-08"
+        iyy="6.74699697323684E-07"
+        iyz="2.48846894279944E-08"
+        izz="8.6762731998211E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="/home/kelin/workspace_xian/meshes/RUTH/Phal_2A.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.501960784313725 0.501960784313725 0.501960784313725 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="/home/kelin/workspace_xian/meshes/RUTH/Phal_2A.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint_Phal_2A"
+    type="continuous">
+    <origin
+      xyz="0 0.00199999999999317 0"
+      rpy="0 0 0" />
+    <parent
+      link="Link_4" />
+    <child
+      link="Phal_2A" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="Phal_2B">
+    <inertial>
+      <origin
+        xyz="-0.0134852752187243 -0.00599999941834055 0.0195859772166097"
+        rpy="0 0 0" />
+      <mass
+        value="0.0131173778349492" />
+      <inertia
+        ixx="1.9060902759955E-06"
+        ixy="8.57988343015656E-13"
+        ixz="9.48266000929872E-07"
+        iyy="2.47473706981715E-06"
+        iyz="-2.68113904826824E-12"
+        izz="1.35658474655883E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="/home/kelin/workspace_xian/meshes/RUTH/Phal_2B.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.501960784313725 0.501960784313725 0.501960784313725 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="/home/kelin/workspace_xian/meshes/RUTH/Phal_2B.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint_Phal_2B"
+    type="continuous">
+    <origin
+      xyz="0.00297209833309273 0.0280000000000004 -0.00521216188336743"
+      rpy="-1.5707963267949 -0.518237369466354 0" />
+    <parent
+      link="Phal_2A" />
+    <child
+      link="Phal_2B" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="Phal_2C">
+    <inertial>
+      <origin
+        xyz="-0.0204881076276311 0.00999998280504531 0.0101652110718751"
+        rpy="0 0 0" />
+      <mass
+        value="0.0104117780590201" />
+      <inertia
+        ixx="7.67903213796372E-07"
+        ixy="4.13735002000571E-12"
+        ixz="3.6537166204974E-07"
+        iyy="1.5952517782496E-06"
+        iyz="5.60179521499666E-12"
+        izz="1.50809477438593E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="/home/kelin/workspace_xian/meshes/RUTH/Phal_2C.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.501960784313725 0.501960784313725 0.501960784313725 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="/home/kelin/workspace_xian/meshes/RUTH/Phal_2C.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint_Phal_2C"
+    type="continuous">
+    <origin
+      xyz="-0.0285000000000002 -0.016 0.0380000000000006"
+      rpy="0 0 0" />
+    <parent
+      link="Phal_2B" />
+    <child
+      link="Phal_2C" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="Phal_3A">
+    <inertial>
+      <origin
+        xyz="-2.31384152838965E-05 0.0118441856861293 -0.00322102954197171"
+        rpy="0 0 0" />
+      <mass
+        value="0.00771334930342022" />
+      <inertia
+        ixx="8.69378927893461E-07"
+        ixy="-3.77014368590307E-10"
+        ixz="-2.70077083632176E-10"
+        iyy="6.68679159583962E-07"
+        iyz="-5.26196361384194E-08"
+        izz="8.31462925826883E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="/home/kelin/workspace_xian/meshes/RUTH/Phal_3A.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.501960784313725 0.501960784313725 0.501960784313725 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="/home/kelin/workspace_xian/meshes/RUTH/Phal_3A.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint_Phal_3A"
+    type="continuous">
+    <origin
+      xyz="0.034901619686093 0.00199999999999037 0.0606784718269899"
+      rpy="0 0 0" />
+    <parent
+      link="Link_4" />
+    <child
+      link="Phal_3A" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="Phal_3B">
+    <inertial>
+      <origin
+        xyz="0.013485276475695 0.00600000447038596 0.0195859723976286"
+        rpy="0 0 0" />
+      <mass
+        value="0.0131173814201307" />
+      <inertia
+        ixx="1.90608995644488E-06"
+        ixy="2.82033735633744E-13"
+        ixz="-9.48265390167524E-07"
+        iyy="2.47473684435651E-06"
+        iyz="2.48568252052314E-12"
+        izz="1.35658423712673E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="/home/kelin/workspace_xian/meshes/RUTH/Phal_3B.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.501960784313725 0.501960784313725 0.501960784313725 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="/home/kelin/workspace_xian/meshes/RUTH/Phal_3B.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint_Phal_3B"
+    type="continuous">
+    <origin
+      xyz="-0.00599984544260034 0.028 4.30658206303745E-05"
+      rpy="-1.5707963268835 -1.5636186283916 0" />
+    <parent
+      link="Phal_3A" />
+    <child
+      link="Phal_3B" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="Phal_3C">
+    <inertial>
+      <origin
+        xyz="0.0204880959107166 -0.0099999741576762 0.0101652057670762"
+        rpy="0 0 0" />
+      <mass
+        value="0.0104117595902126" />
+      <inertia
+        ixx="7.67903471779995E-07"
+        ixy="3.511206450053E-12"
+        ixz="-3.65369953291571E-07"
+        iyy="1.59524834326393E-06"
+        iyz="-5.56277123440106E-12"
+        izz="1.50809191485249E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="/home/kelin/workspace_xian/meshes/RUTH/Phal_3C.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.501960784313725 0.501960784313725 0.501960784313725 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="/home/kelin/workspace_xian/meshes/RUTH/Phal_3C.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint_Phal_3C"
+    type="continuous">
+    <origin
+      xyz="0.0285000000000242 0.016 0.0379999999999819"
+      rpy="0 0 0" />
+    <parent
+      link="Phal_3B" />
+    <child
+      link="Phal_3C" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+
+</robot>
