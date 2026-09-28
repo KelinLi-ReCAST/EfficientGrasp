@@ -70,3 +70,5 @@ results/videos/
 !evaluation/real_world/occlusion/*.png
 !evaluation/real_world/occlusion/*.mp4
 !rl_inverse_kinematics/revision_lr_ablation/*.png
+!media/readme/*.png
+!media/readme/*.jpg
