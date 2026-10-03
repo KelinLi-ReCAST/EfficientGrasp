@@ -72,3 +72,8 @@ results/videos/
 !rl_inverse_kinematics/revision_lr_ablation/*.png
 !media/readme/*.png
 !media/readme/*.jpg
+
+# Thesis chapter 3 verification (evaluation/thesis_ch3 + results/thesis_ch3): keep small outputs
+!gripper_representation/ruth_workspace_sampling/contact_points.npy
+!results/thesis_ch3/*.png
+!results/thesis_ch3/*.npy

@@ -1,0 +1,6 @@
+index range 0..8648 n=576
+nominal step 15.0400; integer steps [15, 16] counts [552, 23]
+array_equal=True allclose=True maxabsdiff=0
+rows found within 1e-6: 576/576
+md5 reproduced 84e3ed31590268ccadc0ae1a0ffea857
+md5 ref 84e3ed31590268ccadc0ae1a0ffea857

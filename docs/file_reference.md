@@ -28,19 +28,19 @@ it loads (look for the constraint that closes the loop).
 
 | Path | What it is |
 |---|---|
-| `feature_extraction/workspace_generator.py` | Analytic fingertip-workspace generator for parametric 3-finger grippers (5-bar / 4-bar / 3-RRR palms, coupled or independent rotation). Rows are L x 9 (3 fingertips x xyz). Produced `data/WorkspaceArrays`. |
+| `feature_extraction/workspace_generator.py` | Analytic fingertip-workspace generator for parametric 3-finger grippers. Only the 5-bar palm is implemented (the 4-bar / 3-RRR / single- and coupled-rotation branches are commented-out stubs, L153-160). Rows are L x 9 (3 fingertips x xyz). Produced `data/WorkspaceArrays`. The script that produced `coupRotWorkspaceArrays` was not found. |
 | `feature_extraction/workspace.py` | PyBullet sampling of the RUTH fingertip workspace (uses `fo_t1o_t2o.urdf`). |
-| `feature_extraction/encoder.py` | TF1/tflearn PointNet autoencoder, input `[None,576,9]`, 6 conv1d layers + max-pool -> 256-d feature, 3-FC decoder. **Contains the coupled Chamfer distance** (Eq. 3.2): the 9 columns are split into 3 fingers and per-finger distances are summed over a shared row index before the min. |
+| `feature_extraction/encoder.py` | TF1/tflearn PointNet autoencoder, input `[None,576,9]`, 6 conv1d layers + max-pool -> 256-d feature, 3-FC decoder; lr 1e-3, batch 1, 10000 epochs, one checkpoint per epoch. **Contains the coupled Chamfer distance** (Eq. 3.2): the 9 columns are split into 3 fingers and per-finger distances are summed over a shared row index before the min. **Training set as committed:** the loop over `WorkspaceArrays` / `coupRot…` / `fourbar…` / `singRot…` (L26-45) is commented out and only `ruthArrays/ws*` is read (L46-47); there is no subsampling code, so only 576-row arrays can be fed. See `results/thesis_ch3/REPORT.md` A3. |
 | `feature_extraction/encoder_test.py` | Restores `saved_models/workspace/9999model.ckpt`, writes `mean/max/min.npy` features for `ruthArrays`. |
 | `feature_extraction/ruth_grasping_kinematics.py` | Analytic RUTH pose from three contact points (fsolve). Used for comparison only. |
 | `feature_extraction/show3d_balls.py`, `render_balls_so.cpp`, `compile_render_balls_so.sh` | Point-cloud viewer (compile the `.so` locally; it was not copied). |
-| `feature_extraction/saved_models/workspace/` | Trained autoencoder checkpoint (epoch 9999). |
-| `feature_extraction/logs/` | TF event files from autoencoder training (Jan–Feb 2022). |
-| `feature_extraction/coupRotWorkspaceArrays/` | 3005 workspace arrays (576 x 9) for coupled-rotation grippers. |
-| `feature_extraction/ruthArrays/` | `ws1.npy` = RUTH workspace (576 x 9) and its 256-d feature. |
+| `feature_extraction/saved_models/workspace/` | Trained autoencoder checkpoint (`9999model.ckpt`, epoch 9999, written 2022-02-07 22:15). From the committed code, the run timeline (42 min for 10000 epochs) and the empty TF logs, this checkpoint was trained on **one array, `ruthArrays/ws1.npy`** (`REPORT.md` A3). Earlier Jan-2022 runs and the 2021 encoder behind `Data_DB/*/workspace.npy` are not preserved. |
+| `feature_extraction/logs/` | 43 TF event files from autoencoder runs (Jan–Feb 2022). They contain only the graph (no scalars, no steps: `add_summary` is commented out). |
+| `feature_extraction/coupRotWorkspaceArrays/` | 3005 workspace arrays, all 576 x 9, numbered ws39..ws96759 (a selection from a larger set), Aug 2021 – Jan 2022. Generating script not found. |
+| `feature_extraction/ruthArrays/` | `ws1.npy` = RUTH workspace (576 x 9) and its 256-d feature (`mean.npy` = `max.npy` = `min.npy`, since the directory holds a single array). `ws1.npy` is an **equal-interval subsample** of `ruth_workspace_sampling/contact_points.npy`: `contact_points[np.linspace(0, 8648, 576, dtype=int)]` (from `rl_inverse_kinematics/*/workspace_visual.py` L17; reproduced byte-for-byte by `evaluation/thesis_ch3/subsample_576.py`). Note: this feature is **not** equal to `Data_DB/ruth/workspace.npy`, which predates it. |
 | `ruth_workspace_sampling/workspace.py` | Sweeps the RUTH motors through `gym.make('kelin-v0')` and saves the fingertip workspace. Needs the gym env in `rl_inverse_kinematics/early_prototype/gym` on `sys.path`. |
-| `ruth_workspace_sampling/contact_points.npy` | The sampled RUTH fingertip workspace, 8649 x 9. |
-| `data/WorkspaceArrays/` | 44 751 `ws<N>.npy` files (3.8 GB), the autoencoder training set. Shapes vary (648/864/1458/2187/2916 x 9); roughly a quarter are empty `(0,9)` arrays and can be filtered. |
+| `ruth_workspace_sampling/contact_points.npy` | The sampled RUTH fingertip workspace, 8649 x 9 (committed to git, 623 KB). The grid is **31 x 31 x 9**: palm motors `0.08*j`, `0.08*k` for j,k in 0..30 and finger-tendon motor `0.1*l` for l in 0..8 (`workspace.py` L533-546), row index `j*279 + k*9 + l`. `evaluation/thesis_ch3/make_fig3_workspace.py` plots it. |
+| `data/WorkspaceArrays/` | 44 751 `ws<N>.npy` files (3.8 GB) from `workspace_generator.py`: 14 112 empty `(0,9)`, 30 639 non-empty with 432/648/864/1458/2187/2916 rows (`results/thesis_ch3/A3_workspace_arrays_stats.md`). **None has 576 rows**, so the committed `encoder.py` cannot consume them directly; whether an earlier, unsaved pipeline used them is unknown. |
 
 ## contact_point_selection
 
@@ -101,7 +101,7 @@ Files in each gripper directory:
 | `move_ur.py` (+ `move_ur5_robotiq.py`) | UR5 positioning and the two-step rest-pose computation (Sec. 3.3.3 step one). |
 | `gym/` | Vendored gym 0.14.0 with `envs/kelin/move_env.py` registered as `kelin-v0` (class name `MoveUr5RuthEnv` for all grippers). Holds the URDFs and meshes. |
 | `obj_pc/` | Object point clouds (robotiq: 16; barrett: 16 x 4 orientations; ruth: 16 YCB + 17 real-world captures). |
-| `contact_points.npy` (485376 x 9), `contact_list.npy`, `ws1.npy` | Training targets / workspace. Identical in all three directories. |
+| `contact_points.npy` (485376 x 9), `contact_list.npy`, `ws1.npy` | RL target pool (485376 = 79 x 32 x 32 x 6 UR5-wrist + RUTH motor sweep), the 21 row indices actually used as training targets, and the RUTH 576 x 9 workspace. Identical in all three directories: the `ws1.npy` under `robotiq_3f/` and `barrett/` is the **RUTH** array (a stray copy), not a Robotiq/Barrett workspace; no Robotiq/Barrett/Kinova workspace array exists in the repo. |
 | `pybullet_object_models` | Symlink into `third_party/`. `ruth/`, `robotiq_3f/` -> `pybullet_object_models_demo_ruth_robotiq`; `barrett/` -> `pybullet_object_models_demo_barrett`; every `gym/envs/kelin/pybullet_object_models` -> `pybullet_object_models`. See *third_party* below. |
 | `barrett/camera.py` | Demo variant with camera capture (May 2022). |
 | `barrett/gym/envs/kelin/Barrett/` | Separate Barrett URDF set with `move_ur5_barrett.py`; not a duplicate of `urdf/barrett_model`. |

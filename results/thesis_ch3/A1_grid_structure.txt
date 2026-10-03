@@ -1,0 +1,17 @@
+shape (8649, 9) dtype float64
+unique rows after np.round(W,6): 8649
+unique rows after np.round(W,4): 8649
+unique rows after np.round(W,3): 8616
+unique rows after np.round(W,2): 1323
+per-column min: [ 0.4416 -0.1971  0.9078  0.4425 -0.1006  0.9093  0.3726 -0.1193  0.9044]
+per-column max: [ 0.5019 -0.0834  0.9212  0.5369 -0.0149  0.9217  0.4804 -0.0422  0.9205]
+--- 31x31x9 hypothesis: max |delta| between consecutive indices
+axis j (motor1, 30 steps): min 0.0021 max 0.0033  per-step: [0.0033, 0.0033, 0.0032, 0.0031, 0.0029, 0.0028, 0.0028, 0.0027, 0.0026, 0.0025, 0.0023, 0.0022, 0.0021, 0.0022, 0.0022, 0.0023, 0.0024, 0.0025, 0.0026, 0.0026, 0.0027, 0.0027, 0.0027, 0.0027, 0.0027, 0.0027, 0.0026, 0.0025, 0.0025, 0.0024]
+axis k (motor2, 30 steps): min 0.0023 max 0.0032  per-step: [0.0023, 0.0032, 0.0032, 0.0031, 0.0031, 0.003, 0.0029, 0.0028, 0.0026, 0.0025, 0.0023, 0.0024, 0.0026, 0.0027, 0.0027, 0.0028, 0.0029, 0.0029, 0.0029, 0.0029, 0.0029, 0.0029, 0.0029, 0.0028, 0.0028, 0.0028, 0.0029, 0.0029, 0.003, 0.003]
+axis l (finger motor, 8 steps): min 0.0078 max 0.0100  per-step: [0.0088, 0.0091, 0.0097, 0.01, 0.0098, 0.0092, 0.0086, 0.0078]
+total displacement j=0->30: 0.0550 m, k=0->30: 0.0667 m, l=0->8: 0.0719 m
+--- 93x93 hypothesis: max |delta| between consecutive indices
+axis a (92 steps): first 12: [0.0627, 0.0636, 0.0718, 0.0631, 0.0642, 0.0726, 0.0635, 0.0648, 0.0733, 0.0639, 0.0654, 0.0739]
+axis b (92 steps): first 12: [0.0093, 0.0092, 0.0698, 0.0093, 0.0092, 0.0695, 0.0094, 0.0093, 0.0696, 0.0093, 0.0092, 0.0698]
+93x93 axis b: every 3rd step jumps (index%3==2): mean 0.0697 vs others mean 0.0094
+=> smooth, monotone-ish small deltas along all three axes of the 31x31x9 reshape, and periodic jumps every 3 (=9/3) and every 9 columns of the 93x93 reshape: the data is a 31x31x9 grid, row index = j*279 + k*9 + l.

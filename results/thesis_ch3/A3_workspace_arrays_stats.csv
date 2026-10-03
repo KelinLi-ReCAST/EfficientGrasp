@@ -1,0 +1,6 @@
+dir,path,n_files,id_range,n_empty,n_nonempty,row_count_distribution,cols,mtime_range
+WorkspaceArrays,gripper_representation/data/WorkspaceArrays,44751,1..44751 (缺号 0),14112,30639,"0: 14112, 432: 1008, 648: 2551, 864: 11760, 1458: 1008, 2187: 2552, 2916: 11760","{(9,): 44751}",2022-02-07 16:56 ~ 2022-02-07 18:24
+coupRotWorkspaceArrays,gripper_representation/feature_extraction/coupRotWorkspaceArrays,3005,39..96759 (缺号 93716),0,3005,576: 3005,"{(9,): 3005}",2021-08-21 19:02 ~ 2022-01-13 13:35
+fourbarWorkspaceArrays,/home/kelin/EfficientGrasp/gripper_representation/feature_extraction/fourbarWorkspaceArrays,NOT FOUND,,,,,,
+singRotWorkspaceArrays,/home/kelin/EfficientGrasp/gripper_representation/feature_extraction/singRotWorkspaceArrays,NOT FOUND,,,,,,
+ruthArrays,gripper_representation/feature_extraction/ruthArrays,1,1..1 (缺号 0),0,1,576: 1,"{(9,): 1}",2022-02-07 20:52 ~ 2022-02-07 20:52
