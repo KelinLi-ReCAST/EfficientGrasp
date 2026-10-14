@@ -338,6 +338,12 @@ Set `obj_name` at the top of each script. `target_position.py` and `show_contact
 
 ---
 
+## License
+
+The code is released under the [MIT License](LICENSE). Code derived from other projects keeps its own licence: `contact_point_selection/UniGrasp/` (UniGrasp), `grasp_quality/` (diverse-and-stable-grasp, including DeepSDF and manopth; the MANO models are licence-restricted), and the copies of gym in `rl_inverse_kinematics/` (see the `LICENSE` files in those folders).
+
+---
+
 ## Citation
 
 ```bibtex
