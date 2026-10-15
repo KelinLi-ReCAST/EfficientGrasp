@@ -1,5 +1,11 @@
 # EfficientGrasp: A Unified Data-Efficient Learning to Grasp Method for Multi-fingered Robot Hands
 
+<p align="center">
+  <a href="https://arxiv.org/abs/2206.15159"><img src="https://img.shields.io/badge/Paper-333333?style=for-the-badge&logo=arxiv&logoColor=white" alt="Paper"></a>
+  <a href="https://github.com/KelinLi-ReCAST/EfficientGrasp"><img src="https://img.shields.io/badge/Code-333333?style=for-the-badge&logo=github&logoColor=white" alt="Code"></a>
+  <img src="https://img.shields.io/badge/Dataset-333333?style=for-the-badge&logo=huggingface&logoColor=white" alt="Dataset">
+</p>
+
 Code and data for the paper [*EfficientGrasp: A Unified Data-Efficient Learning to Grasp Method for Multi-fingered Robot Hands*](https://arxiv.org/abs/2206.15159) (Kelin Li, Nicholas Baron, Xian Zhang and Nicolas Rojas, IEEE Robotics and Automation Letters 2022, presented at IROS 2022).
 
 The repository contains the three phases of the method: the fingertip-workspace autoencoder that produces the gripper feature, the point set selection network (PSSN) that selects contact points on an object point cloud, and the reinforcement-learning policies that solve the gripper inverse kinematics. It also contains the PyBullet grasping trials, the grasp quality computation and the processing scripts of the real-world experiments.
