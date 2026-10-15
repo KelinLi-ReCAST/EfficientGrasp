@@ -37,9 +37,9 @@ Training and the simulation trials need only a PC. The robot, the hand and the c
 *The RUTH hand in three operation modes. The finger bases move with the five-bar palm, so the "most open" and "most closed" configurations that UniGrasp needs are ambiguous.*
 
 <p align="center">
-  <img src="media/readme/real_objects.jpg" height="240" alt="YCB objects used in the real-world experiments">
+  <img src="media/readme/real_objects.jpg" width="38%" alt="YCB objects used in the real-world experiments">
   &nbsp;
-  <img src="media/readme/ruth_real_grasp.jpg" height="240" alt="RUTH hand configuring from its initial position to the contact points">
+  <img src="media/readme/ruth_real_grasp.jpg" width="59%" alt="RUTH hand configuring from its initial position to the contact points">
 </p>
 
 *Left: the YCB objects of the real-world experiments. Right: the RUTH hand on the UR5 moving from its initial configuration to the selected contact points (red, green, blue).*
