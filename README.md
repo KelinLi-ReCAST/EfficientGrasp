@@ -17,9 +17,9 @@ A gripper is described by the workspace of its fingertips instead of a URDF mode
 </p>
 
 <p align="center">
-  <img src="media/readme/sim_ruth_pi00.gif" width="280" alt="UR5 with the RUTH hand grasping the mustard bottle in simulation">
-  <img src="media/readme/sim_ruth_pi0pi.gif" width="280" alt="UR5 with the RUTH hand grasping the mustard bottle in simulation">
-  <img src="media/readme/sim_ruth_pipipi.gif" width="280" alt="UR5 with the RUTH hand grasping the mustard bottle in simulation">
+  <img src="media/readme/sim_ruth_pi00.gif" width="32%" alt="UR5 with the RUTH hand grasping the mustard bottle in simulation">
+  <img src="media/readme/sim_ruth_pi0pi.gif" width="32%" alt="UR5 with the RUTH hand grasping the mustard bottle in simulation">
+  <img src="media/readme/sim_ruth_pipipi.gif" width="32%" alt="UR5 with the RUTH hand grasping the mustard bottle in simulation">
 </p>
 
 *UR5 with the RUTH hand grasping the YCB mustard bottle in PyBullet (3× speed).*
