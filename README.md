@@ -16,9 +16,11 @@ A gripper is described by the workspace of its fingertips instead of a URDF mode
   <img src="media/readme/pipeline.png" width="860" alt="Flowchart of EfficientGrasp: feature extraction, contact points generation, inverse kinematics computation">
 </p>
 
-| Object orientation `pi00` | Object orientation `pi0pi` | Object orientation `pipipi` |
-|:---:|:---:|:---:|
-| ![pi00](media/readme/sim_ruth_pi00.gif) | ![pi0pi](media/readme/sim_ruth_pi0pi.gif) | ![pipipi](media/readme/sim_ruth_pipipi.gif) |
+<p align="center">
+  <img src="media/readme/sim_ruth_pi00.gif" width="280" alt="UR5 with the RUTH hand grasping the mustard bottle in simulation">
+  <img src="media/readme/sim_ruth_pi0pi.gif" width="280" alt="UR5 with the RUTH hand grasping the mustard bottle in simulation">
+  <img src="media/readme/sim_ruth_pipipi.gif" width="280" alt="UR5 with the RUTH hand grasping the mustard bottle in simulation">
+</p>
 
 *UR5 with the RUTH hand grasping the YCB mustard bottle in PyBullet (3× speed).*
 
