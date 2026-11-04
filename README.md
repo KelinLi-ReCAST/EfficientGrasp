@@ -146,7 +146,9 @@ hf download KelinLiIC/EfficientGrasp --repo-type dataset --local-dir . --exclude
 
 The downloaded folders are kept out of git by `.gitignore`.
 
-The MANO models (`grasp_quality/utils/manopth/mano/models/`) are licence-restricted and are not redistributed: obtain them from [mano.is.tue.mpg.de](https://mano.is.tue.mpg.de).
+Of the trained SAC policies, the dataset holds the runs that `RL_gripper.py` loads: `seed--0` of `ruth` and `robotiq_3f`, and `seed--1` of `barrett`.
+
+The MANO models (`grasp_quality/utils/manopth/mano/models/` and `grasp_quality/data/mano/MANO_RIGHT.pkl`) are licence-restricted and are not redistributed: obtain them from [mano.is.tue.mpg.de](https://mano.is.tue.mpg.de).
 
 The PSSN is trained on the UniGrasp dataset, which is not redistributed here either: download `train_data.tar.gz` and `test_data.tar.gz` from the links in `contact_point_selection/UniGrasp/README.md` and extract them to `contact_point_selection/UniGrasp/data/train_data/` and `test_data/`.
 
@@ -165,8 +167,8 @@ The absolute paths of the machines the code was written on have been replaced by
 - `/home/kelin/workspace_xian/meshes/RUTH` (`fo_t1o_t2o.urdf`) → `rl_inverse_kinematics/ruth/gym/envs/kelin/meshes/RUTH`.
 - `/home/robin-lab/Kelin/UniGrasp-master` and `/home/kelin/workspace_kelin/previous_work/UniGrasp` → `contact_point_selection/UniGrasp`.
 - `/media/robin-lab/Jim/train_data`, `test_data` → `contact_point_selection/UniGrasp/data/train_data`, `test_data`.
-- `/home/kelin/Downloads/contact_points` → `contact_point_selection/UniGrasp/data/ObjectPointClouds/Contact_Points/`, read as `Ruth_Ycb<Object>_<ori>.npy` (`ruth/demo.py`, `grasp_quality`).
-- `/home/kelin/Downloads/contact_points_U` → `contact_point_selection/UniGrasp/data/ObjectPointClouds/Contact_Points_UniGrasp/`, read as `Robotiq_Ycb<Object>_<ori>.npy` and `BH_Ycb<Object>_<ori>.npy` (`robotiq_3f/demo.py`, `barrett/demo.py`).
+- `/home/kelin/Downloads/contact_points` → `contact_point_selection/UniGrasp/data/ObjectPointClouds/Contact_Points/`, read as `Ruth_Ycb<Object>_<ori>.npy` (`ruth/demo.py`, `grasp_quality`). These files are not on Hugging Face and are written with Step 2; the PSSN outputs on Hugging Face are `Contact_Points/{Barret,Robotiq,Ruth}/<Gripper>_<Object>.npy`.
+- `/home/kelin/Downloads/contact_points_U` → `contact_point_selection/UniGrasp/data/ObjectPointClouds/Contact_Points_UniGrasp/`, read as `Robotiq_Ycb<Object>_<ori>.npy` and `BH_Ycb<Object>_<ori>.npy` (`robotiq_3f/demo.py`, `barrett/demo.py`). These files are not on Hugging Face either.
 - `/home/kelin/Downloads/contact_points_revision` → `evaluation/real_world/contact_points/`.
 - `/home/kelin/Downloads/revision_real_pc` → `evaluation/real_world/raw_pointclouds/`.
 - `/home/kelin/Downloads/revision_sparse_real_pc` → `evaluation/real_world/object_pointclouds/`.
@@ -271,7 +273,7 @@ The command-line arguments of `val.py` are overwritten in its `__main__` block. 
 python evaluation/simulation/test.py --gripper ruth     # or robotiq / barrett
 ```
 
-This runs 16 YCB objects in 4 orientations (`000`, `pi00`, `pi0pi`, `pipipi`), 64 trials in total, in the PyBullet GUI, and records each one. The contact points are not computed on the fly; they are read from the files written in Step 2. Every trial calls `demo.main` of the chosen gripper:
+This runs 16 YCB objects in 4 orientations (`000`, `pi00`, `pi0pi`, `pipipi`), 64 trials in total, in the PyBullet GUI, and records each one. The contact points are not computed on the fly; they are read from the files written in Step 2, saved under the names and folders listed in §3.5. Every trial calls `demo.main` of the chosen gripper:
 
 1. **Scene.** The UR5 with the gripper is loaded and moved to its start configuration.
 2. **Contact points.** The best-ranked set (`point_nos = 0`) is read for the object.

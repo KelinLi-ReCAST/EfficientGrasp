@@ -89,6 +89,8 @@ One directory per gripper, each self-contained and runnable from inside it:
 | `robotiq_3f/` | `ur5_plus_robotiq_3f.urdf` | 6 | 0 (to 2300), 1 (to 145), 63 MB |
 | `barrett/` | `ur5_plus_barrett.urdf` | 9 | 0 (to 3050), 1 (to 2905), 1.3 GB |
 
+Only the runs loaded by `RL_gripper.py` are on Hugging Face: `seed--0` of `ruth/` and `robotiq_3f/`, `seed--1` of `barrett/`.
+
 Files in each gripper directory:
 
 | File | What it is |
@@ -183,6 +185,7 @@ All other objects are byte-identical across the three.
 | `workspace_xian/Hindsight-Experience-Replay/` | `rl_inverse_kinematics/her_baseline_attempt/` |
 | `test.py`, `RL_eval.py` | `evaluation/simulation/` |
 | `unigrasp_videos/` | `results/videos/unigrasp_baseline/` |
+| `videos/` | `results/videos/efficientgrasp/` |
 | `pointcloud_process.py` | `evaluation/real_world/` |
 | `Occlusion/` | `evaluation/real_world/occlusion/` |
 
@@ -198,4 +201,5 @@ All other objects are byte-identical across the three.
 - `UniGrasp/saved_models/RECOVERED_FILES/` (empty), `exp_test.txt` (empty), `scene1.txt` (point dump), `ObjectPointClouds.zip` (duplicate of `data/ObjectPointClouds`), `gripper_urdf/2` (stray), `*.urdf.old`, empty `logging/` dirs.
 - `feature_extraction/top1_f1_index_1.txt` (dump), `workspace_generation/log/kelin-v0/seed--{125,999}` (config only, no checkpoints).
 - `27.txt` (empty).
-- `videos/` (65 EfficientGrasp simulation MP4s): copied at first, then removed on request; the originals remain in `~/RAL-IROS2022/videos/`.
+- The SAC runs not loaded by `RL_gripper.py`: `train_ruth/log/kelin-v0/seed--{1,2,3}`, `train_robotiq/log/kelin-v0/seed--1`, `train_barrett/log/kelin-v0/seed--0`.
+- `FC/data/mano/MANO_RIGHT.pkl` and `FC/utils/manopth/mano/models/` (MANO, licence-restricted).
