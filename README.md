@@ -56,7 +56,7 @@ Training and the simulation trials need only a PC. The robot, the hand and the c
 
 ## 2. Repository layout
 
-The code is split by functional module. `contact_point_selection/UniGrasp/` is derived from [UniGrasp](https://github.com/stanford-iprl-lab/UniGrasp) and `grasp_quality/` from [diverse-and-stable-grasp](https://github.com/tengyu-liu/diverse-and-stable-grasp) (which vendors DeepSDF); both keep their own licences. Each gripper directory in `rl_inverse_kinematics/` ships its own copy of gym 0.14.0 with the custom environment.
+Code, data and media live in separate top-level folders. Everything marked *(Hugging Face)* below is not in git; it is downloaded from [Hugging Face](https://huggingface.co/datasets/KelinLiIC/EfficientGrasp) (§3.4). The code is split by functional module. `contact_point_selection/UniGrasp/` is derived from [UniGrasp](https://github.com/stanford-iprl-lab/UniGrasp) and `grasp_quality/` from [diverse-and-stable-grasp](https://github.com/tengyu-liu/diverse-and-stable-grasp) (which vendors DeepSDF); both keep their own licences. Each gripper directory in `rl_inverse_kinematics/` ships its own copy of gym 0.14.0 with the custom environment.
 
 ```
 environment.yml                        conda environment "RAL2023"
@@ -83,16 +83,22 @@ rl_inverse_kinematics/
     demo.py  RL_gripper.py  move_ur.py full grasp pipeline in PyBullet
     gym/envs/kelin/                    environment kelin-v0, URDFs of UR5 + gripper
   early_prototype/                     first SAC version
-  revision_lr_ablation/                learning-rate study and its plots
+  revision_lr_ablation/                learning-rate study (plots on Hugging Face)
   her_baseline_attempt/                HER baseline, not connected to the environment
 evaluation/
   simulation/   test.py  RL_eval.py    trial driver (16 YCB objects), RL-IK error plot
-  real_world/                          point cloud processing, target pose, renders, occlusion analysis
-media/readme/                          images used in this README
+  real_world/                          point cloud processing and target pose scripts
+    object_pointclouds/                RealSense captures, 2048 × 3 (Hugging Face)
+    object_photos/  occlusion/         contact-point renders, occlusion analysis (Hugging Face)
+results/                               (Hugging Face)
+  rl_ik_error/  pssn_accuracy/         evaluation logs behind the figures and tables of the paper
+  videos/                              PyBullet recordings of the grasp trials
+third_party/                           pybullet-object-models, YCB meshes (Hugging Face)
+media/readme/                          images and GIFs used in this README
 docs/file_reference.md                 per-file notes and provenance of every folder
 ```
 
-`results/`, `third_party/` and all datasets, checkpoints and meshes are not in git; see §3.4.
+The training data (`gripper_representation/data/`, `contact_point_selection/UniGrasp/data/`), the trained models (`saved_models/`, `rl_inverse_kinematics/<gripper>/log/`) and the meshes of the URDFs are also on Hugging Face, at the same paths.
 
 ---
 
@@ -131,11 +137,14 @@ python -c "import gym; print(gym.__file__)"   # must point into this directory
 
 ### 3.4 Data and models
 
-GitHub holds the code, the URDF/xacro files and a few figures. The datasets, trained models, meshes, evaluation logs and videos are on HuggingFace: [KelinLiIC/EfficientGrasp](https://huggingface.co/datasets/KelinLiIC/EfficientGrasp). They sit at the same paths as in this repository, so download them into the clone:
+GitHub holds the code, the URDF/xacro files and the media of this README. The datasets, trained models, meshes, evaluation logs, figures and videos are on Hugging Face: [KelinLiIC/EfficientGrasp](https://huggingface.co/datasets/KelinLiIC/EfficientGrasp). The dataset has the same layout as this repository, so download it into the root of your clone:
 
 ```bash
-hf download KelinLiIC/EfficientGrasp --repo-type dataset --local-dir . --exclude README.md .gitattributes
+pip install -U huggingface_hub
+hf download KelinLiIC/EfficientGrasp --repo-type dataset --local-dir . --exclude README.md --exclude .gitattributes
 ```
+
+The downloaded folders are kept out of git by `.gitignore`.
 
 The MANO models (`grasp_quality/utils/manopth/mano/models/`) are licence-restricted and are not redistributed: obtain them from [mano.is.tue.mpg.de](https://mano.is.tue.mpg.de).
 
@@ -226,7 +235,7 @@ RUTH has no labels of its own in the UniGrasp dataset. It uses ID 13, i.e. the n
   <img src="media/readme/real_contact_points.png" width="720" alt="Contact points selected on real point clouds">
 </p>
 
-*Contact points selected for the RUTH hand on point clouds captured with the RealSense camera (`evaluation/real_world/object_photos/`).*
+*Contact points selected for the RUTH hand on point clouds captured with the RealSense camera. Renders of all captures are in `evaluation/real_world/object_photos/` on Hugging Face.*
 
 ### Step 3: Train the inverse-kinematics policy
 
@@ -309,7 +318,7 @@ Using the workspace instead of gripper point clouds reduced the memory needed fo
 
 ## 6. Optional: real-world experiments
 
-The real-world experiments used the RUTH hand on a UR5 with a RealSense D435i placed as in simulation. **The code that captures the point cloud and the code that commands the UR5 and the hand are not part of this repository.** What is included are the captured point clouds and the scripts between capture and execution, in `evaluation/real_world/`:
+The real-world experiments used the RUTH hand on a UR5 with a RealSense D435i placed as in simulation. **The code that captures the point cloud and the code that commands the UR5 and the hand are not part of this repository.** What is included are the scripts between capture and execution, in `evaluation/real_world/`, and the captured point clouds, on Hugging Face (§3.4):
 
 | Script | Input | Output |
 |---|---|---|
@@ -320,7 +329,7 @@ The real-world experiments used the RUTH hand on a UR5 with a RealSense D435i pl
 
 Set `obj_name` at the top of each script. `target_position.py` and `show_contact_points.py` import `move_ur` and `show3d_balls` from `rl_inverse_kinematics/ruth/`, so run them with that directory on `PYTHONPATH`. `show3d_balls` needs its C++ renderer, built with `compile_render_balls_so.sh`.
 
-`occlusion/` holds the material of the failure analysis: RGB captures, point clouds of self-occluded objects, and four simulation clips of the mustard bottle (on HuggingFace).
+`occlusion/` on Hugging Face holds the material of the failure analysis: RGB captures, point clouds of self-occluded objects, and four simulation clips of the mustard bottle.
 
 ---
 

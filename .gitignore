@@ -1,7 +1,7 @@
 # ---------------------------------------------------------------------------
-# GitHub holds code, URDFs and a few figures only.
-# Datasets, trained models, meshes, logs and result videos are distributed
-# separately (HuggingFace) — see README.md, section "Data and models".
+# GitHub holds the code, the URDFs and the media of README.md.
+# Datasets, trained models, meshes, logs, figures and videos are on
+# Hugging Face (KelinLiIC/EfficientGrasp) — see README.md, section 3.4.
 # ---------------------------------------------------------------------------
 
 # Python / editor
@@ -62,16 +62,19 @@ rl_inverse_kinematics/her_baseline_attempt/results and plots/
 **/barrett_model/cad/
 **/barrett_model/doc/
 
-# Media: ignore everything, then whitelist the figures/videos that belong to the paper
+# Media: ignore everything except the images and GIFs shown in README.md
 *.png
 *.jpg
 *.jpeg
+*.gif
 *.mp4
-!evaluation/real_world/object_photos/*.png
-!evaluation/real_world/occlusion/*.png
-!rl_inverse_kinematics/revision_lr_ablation/*.png
 !media/readme/*.png
 !media/readme/*.jpg
+!media/readme/*.gif
+
+# Outputs of unigrasp.test
+top1_f*_index_*.txt
+scene1.txt
 
 # Editor, OS and backup leftovers
 Thumbs.db

@@ -111,7 +111,7 @@ Other RL directories:
 | Directory | What it is |
 |---|---|
 | `early_prototype/` | Nov 2021 – Feb 2022 first SAC version (deterministic policy) with its own gym env; `log/kelin-v0/seed--0` trained to epoch 1670. The RUTH workspace sampler that lived here is now `gripper_representation/ruth_workspace_sampling/`. |
-| `revision_lr_ablation/` | June 2022 SAC learning-rate / step-LR study for the RA-L revision (`log/kelin-v0/LR001, LR003, stepLR, ...`, `plot_error.ipynb`, result PNGs). Originally `workspace_xian/SAC_train`. |
+| `revision_lr_ablation/` | June 2022 SAC learning-rate / step-LR study for the RA-L revision (`log/kelin-v0/LR001, LR003, stepLR, ...`, `plot_error.ipynb`; the result PNGs are on Hugging Face). Originally `workspace_xian/SAC_train`. |
 | `her_baseline_attempt/` | Unmodified clone of hemilpanchiwala/Hindsight-Experience-Replay with a `gym/envs/kelin` env added; DDPG/HER was never wired to it. Originally `workspace_xian/Hindsight-Experience-Replay`. |
 
 ## evaluation/simulation
@@ -140,8 +140,8 @@ captured data and the pre/post-processing scripts.
 | `target_position.py` | Computes the UR5 target pose from a PSSN contact-point set for a real object. Imports `move_ur` from `rl_inverse_kinematics/ruth/`. |
 | `show_contact_points.py` | Visualises contact points on a real point cloud. Imports `show3d_balls` from `rl_inverse_kinematics/ruth/`. |
 | `object_pointclouds/` | 17 real captures (2048 x 3): banana, bowl, bowl-bottom, clip-L, clip-M, drill-lay, drill-stand, football, mug, mug-bottom, screwdriver, soup-can (x4 poses), spam-can (x3 poses). A copy also remains in `rl_inverse_kinematics/ruth/obj_pc/` because `demo.py` loads from there. |
-| `object_photos/` | Renders of the real point clouds with the three selected contact points marked in red, green and blue (May 2022). Despite the folder name these are not camera photos. |
-| `occlusion/` | Material for the occlusion failure analysis: RGB captures, occluded point-cloud renders, and four RUTH MustardBottle sim clips (on HuggingFace). |
+| `object_photos/` (Hugging Face) | Renders of the real point clouds with the three selected contact points marked in red, green and blue (May 2022). Despite the folder name these are not camera photos. |
+| `occlusion/` (Hugging Face) | Material for the occlusion failure analysis: RGB captures, occluded point-cloud renders, and four RUTH MustardBottle sim clips. |
 
 ---
 
