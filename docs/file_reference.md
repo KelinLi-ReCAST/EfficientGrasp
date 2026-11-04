@@ -141,7 +141,7 @@ captured data and the pre/post-processing scripts.
 | `show_contact_points.py` | Visualises contact points on a real point cloud. Imports `show3d_balls` from `rl_inverse_kinematics/ruth/`. |
 | `object_pointclouds/` | 17 real captures (2048 x 3): banana, bowl, bowl-bottom, clip-L, clip-M, drill-lay, drill-stand, football, mug, mug-bottom, screwdriver, soup-can (x4 poses), spam-can (x3 poses). A copy also remains in `rl_inverse_kinematics/ruth/obj_pc/` because `demo.py` loads from there. |
 | `object_photos/` | Renders of the real point clouds with the three selected contact points marked in red, green and blue (May 2022). Despite the folder name these are not camera photos. |
-| `occlusion/` | Material for the occlusion failure analysis: RGB captures, occluded point-cloud renders, and four RUTH MustardBottle sim clips. |
+| `occlusion/` | Material for the occlusion failure analysis: RGB captures, occluded point-cloud renders, and four RUTH MustardBottle sim clips (on HuggingFace). |
 
 ---
 

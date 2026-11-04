@@ -3,7 +3,7 @@
 <p align="center">
   <a href="https://arxiv.org/abs/2206.15159"><img src="https://img.shields.io/badge/Paper-333333?style=for-the-badge&logo=arxiv&logoColor=white" alt="Paper"></a>
   <a href="https://github.com/KelinLi-ReCAST/EfficientGrasp"><img src="https://img.shields.io/badge/Code-333333?style=for-the-badge&logo=github&logoColor=white" alt="Code"></a>
-  <img src="https://img.shields.io/badge/Dataset-333333?style=for-the-badge&logo=huggingface&logoColor=white" alt="Dataset">
+  <a href="https://huggingface.co/datasets/KelinLiIC/EfficientGrasp"><img src="https://img.shields.io/badge/Dataset-333333?style=for-the-badge&logo=huggingface&logoColor=white" alt="Dataset"></a>
 </p>
 
 Code and data for the paper [*EfficientGrasp: A Unified Data-Efficient Learning to Grasp Method for Multi-fingered Robot Hands*](https://arxiv.org/abs/2206.15159) (Kelin Li, Nicholas Baron, Xian Zhang and Nicolas Rojas, IEEE Robotics and Automation Letters 2022, presented at IROS 2022).
@@ -131,7 +131,7 @@ python -c "import gym; print(gym.__file__)"   # must point into this directory
 
 ### 3.4 Data and models
 
-GitHub holds the code, the URDF/xacro files and a few figures and clips. Everything else is distributed separately on HuggingFace (link to be added) and has to be placed at the same paths, because the scripts expect the files there. `.gitignore` encodes this split, so the files are not staged by accident.
+GitHub holds the code, the URDF/xacro files and a few figures. Everything else is distributed separately on HuggingFace ([KelinLiIC/EfficientGrasp](https://huggingface.co/datasets/KelinLiIC/EfficientGrasp)) and has to be placed at the same paths, because the scripts expect the files there. `.gitignore` encodes this split, so the files are not staged by accident.
 
 | Path (relative to the repository root) | Contents | Size |
 |---|---|---|
@@ -147,6 +147,8 @@ GitHub holds the code, the URDF/xacro files and a few figures and clips. Everyth
 | `third_party/` | [pybullet-object-models](https://github.com/eleramp/pybullet-object-models) (YCB meshes), three variants | 430 MB |
 | `results/rl_ik_error/`, `results/pssn_accuracy/` | Evaluation logs behind Fig. 7, Table II and Fig. 6 of the paper | 1 MB |
 | `results/videos/unigrasp_baseline/` | 128 grasp clips of the UniGrasp baseline | 97 MB |
+| `evaluation/real_world/occlusion/ruth_MustardBottle_*.mp4` | Four simulation clips of the mustard bottle used in the occlusion analysis | 3 MB |
+| `rl_inverse_kinematics/her_baseline_attempt/results and plots/` | DDPG and DQN weights (with and without HER) of the HER baseline attempt | 4 MB |
 | `evaluation/real_world/object_pointclouds/` | 17 RealSense captures, 2048 × 3 | 1 MB |
 
 The PSSN is trained on the UniGrasp dataset, which is not redistributed here: download `train_data.tar.gz` and `test_data.tar.gz` from the links in `contact_point_selection/UniGrasp/README.md`.
@@ -325,7 +327,7 @@ The real-world experiments used the RUTH hand on a UR5 with a RealSense D435i pl
 
 Set `obj_name` at the top of each script. `target_position.py` and `show_contact_points.py` import `move_ur` and `show3d_balls` from `rl_inverse_kinematics/ruth/`, so run them with that directory on `PYTHONPATH`. `show3d_balls` needs its C++ renderer, built with `compile_render_balls_so.sh`.
 
-`occlusion/` holds the material of the failure analysis: RGB captures, point clouds of self-occluded objects, and four simulation clips of the mustard bottle.
+`occlusion/` holds the material of the failure analysis: RGB captures, point clouds of self-occluded objects, and four simulation clips of the mustard bottle (on HuggingFace).
 
 ---
 
