@@ -142,6 +142,7 @@ GitHub holds the code, the URDF/xacro files and the media of this README. The da
 ```bash
 pip install -U huggingface_hub
 hf download KelinLiIC/EfficientGrasp --repo-type dataset --local-dir . --exclude README.md --exclude .gitattributes
+tar -xf gripper_representation/data/WorkspaceArrays.tar -C gripper_representation/data   # autoencoder training set, 44 751 files
 ```
 
 The downloaded folders are kept out of git by `.gitignore`.
