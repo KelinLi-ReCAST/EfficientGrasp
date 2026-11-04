@@ -151,7 +151,7 @@ The MANO models (`grasp_quality/utils/manopth/mano/models/` and `grasp_quality/d
 
 The PSSN is trained on the UniGrasp dataset, which is not redistributed here either: download `train_data.tar.gz` and `test_data.tar.gz` from the links in `contact_point_selection/UniGrasp/README.md` and extract them to `contact_point_selection/UniGrasp/data/train_data/` and `test_data/`.
 
-`rl_inverse_kinematics/*/pybullet_object_models` are symbolic links into `third_party/`. They are broken until `third_party/` is in place. The three variants differ only in the mass, friction and inertia of the mustard bottle (`docs/file_reference.md`).
+`rl_inverse_kinematics/*/pybullet_object_models` are symbolic links into `third_party/`. They are broken until `third_party/` is in place. The three variants differ only in the model of the mustard bottle (`docs/file_reference.md`).
 
 ### 3.5 Paths
 
@@ -304,7 +304,7 @@ The `__main__` block evaluates the force-closure term of [Liu et al.](https://ar
 | `epoch_<N>.npy` | Output of `val.py`: mean fingertip error per episode (mm), 100 episodes. The published logs are in `results/rl_ik_error/<gripper>/` |
 | `results/videos/{efficientgrasp,unigrasp_baseline}/<gripper>_<Object>_<ori>.mp4` | PyBullet recording of one trial |
 
-Results reported in the paper (5 trials per object; a grasp is successful if the object is held for 5 s above the table):
+Results reported in the paper (a grasp is successful if the object is held for 5 s above the table):
 
 | Gripper | UniGrasp success (%) | EfficientGrasp success (%) | EfficientGrasp mean GQS |
 |---|:---:|:---:|:---:|
