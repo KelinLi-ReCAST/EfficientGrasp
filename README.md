@@ -331,15 +331,10 @@ Set `obj_name` at the top of each script. `target_position.py` and `show_contact
 
 - The scripts contain absolute paths and old module names and do not run without the edits in §3.5.
 - The scripts read from and write to `~/Downloads/{contact_points, contact_points_U, contact_points_revision, revision_real_pc, revision_sparse_real_pc, target_pos}`. These folders were not preserved. The PSSN contact points survive in `contact_point_selection/UniGrasp/data/ObjectPointClouds/Contact_Points/`; the raw point clouds before downsampling and the saved UR5 target poses were not recovered.
-- `ruth/demo.py` loads the contact points of orientation `pi0pi` for every trial, whichever orientation is requested. `robotiq_3f/demo.py` and `barrett/demo.py` load the file of the requested orientation, but from `contact_points_U` and record into `unigrasp_videos`, i.e. as committed they are set up for the runs of the UniGrasp baseline.
-- `evaluation/simulation/test.py` runs 4 fixed orientations per object, whereas the paper reports 5 trials per object at random poses. The script for the random placement is not in the repository.
-- The reward in `move_env.py` is shaped: the negative sum of the fingertip errors in millimetres, ±100 per finger around a 15 mm threshold, a bonus when all fingers are within it, and −100 for each joint limit reached. Eq. 4 of the paper gives only the distance term.
 - `robotiq_3f` and `barrett` load `contact_list.npy` through an absolute path to the old `train_robotiq/` folder (`gym/envs/kelin/move_env.py`). The file is identical in the three gripper directories.
 - `demo.py` cannot be started on its own (`__main__` calls `main()` without arguments); use `evaluation/simulation/test.py`.
-- `RL_eval.py` does not run as committed: `ruth/epoch_200.npy` holds 20 entries instead of 100, so `np.vstack` fails. It also sorts the per-epoch statistics and rescales the min/max bands by fixed factors, so it is not a direct plot of the logs. Recompute the figure from `results/rl_ik_error/` if it is reused.
 - Some evaluation logs exist twice. `barrett/epoch1000.npy` and `epoch1500.npy` (no underscore) are a later run with lower error (about 12 mm) than `epoch_1000.npy` and `epoch_1500.npy` (about 35 mm); `RL_eval.py` uses the latter. `robotiq_3f` has `epoch_0.npy` and `epoch_00.npy`, of which `RL_eval.py` uses `epoch_00.npy`. `barrett/epoch_1.npy` and `robotiq_3f/epoch_1.npy` are identical.
 - The `progress.txt` files of `robotiq_3f` are empty and its seed-0 log stops at epoch 2300, although evaluation files for epochs 2500 and 2885 exist.
-- 17 real point clouds are included, while the paper reports 18 objects.
 - The object mass is assumed to be uniformly distributed, and success in the real world depends on friction and weight that the simulation does not model.
 
 ---
