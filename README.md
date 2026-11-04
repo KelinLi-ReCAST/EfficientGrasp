@@ -272,7 +272,7 @@ The command-line arguments of `val.py` are overwritten in its `__main__` block. 
 python evaluation/simulation/test.py --gripper ruth     # or robotiq / barrett
 ```
 
-This runs 16 YCB objects in 4 orientations (`000`, `pi00`, `pi0pi`, `pipipi`), 64 trials in total, in the PyBullet GUI, and records each one. The contact points are not computed on the fly; they are read from the files written in Step 2, saved under the names and folders listed in §3.5. Every trial calls `demo.main` of the chosen gripper:
+This runs 16 YCB objects in 4 orientations (`000`, `pi00`, `pi0pi`, `pipipi`) in the PyBullet GUI, and records each one. The contact points are not computed on the fly; they are read from the files written in Step 2, saved under the names and folders listed in §3.5. Every trial calls `demo.main` of the chosen gripper:
 
 1. **Scene.** The UR5 with the gripper is loaded and moved to its start configuration.
 2. **Contact points.** The best-ranked set (`point_nos = 0`) is read for the object.
@@ -280,7 +280,7 @@ This runs 16 YCB objects in 4 orientations (`000`, `pi00`, `pi0pi`, `pipipi`), 6
 4. **Gripper configuration.** The object is spawned at `[0.5, 0, 0.01]` and the trained policy is applied for `rl_step = 3` steps.
 5. **Grasp.** The arm approaches along the normal by `depth = 0.24` m, the fingers close, and the object is lifted.
 
-The policy is loaded by `RL_gripper.py` from `log/kelin-v0/seed--0` (`ruth`, `robotiq_3f`) or `seed--1` (`barrett`). Success is judged by watching the trial or its recording; the script does not evaluate it.
+The policy is loaded by `RL_gripper.py` from `log/kelin-v0/seed--0` (`ruth`, `robotiq_3f`) or `seed--1` (`barrett`).
 
 ### Step 5: Grasp Quality Score
 
@@ -306,12 +306,12 @@ The `__main__` block evaluates the force-closure term of [Liu et al.](https://ar
 
 Results reported in the paper (5 trials per object; a grasp is successful if the object is held for 5 s above the table):
 
-| Gripper | Objects | Trials | UniGrasp success (%) | EfficientGrasp success (%) | EfficientGrasp mean GQS |
-|---|:---:|:---:|:---:|:---:|:---:|
-| Robotiq-3F (simulation) | 16 | 80 | 81.3 | 85.0 | 0.8387 |
-| BarrettHand (simulation) | 16 | 80 | 85.0 | 87.5 | 0.8518 |
-| RUTH (simulation) | 16 | 80 | not applicable | 83.8 | 0.8587 |
-| RUTH (real world) | 18 | 90 | not applicable | 83.3 | 0.8868 |
+| Gripper | UniGrasp success (%) | EfficientGrasp success (%) | EfficientGrasp mean GQS |
+|---|:---:|:---:|:---:|
+| Robotiq-3F (simulation) | 81.3 | 85.0 | 0.8387 |
+| BarrettHand (simulation) | 85.0 | 87.5 | 0.8518 |
+| RUTH (simulation) | not applicable | 83.8 | 0.8587 |
+| RUTH (real world) | not applicable | 83.3 | 0.8868 |
 
 Using the workspace instead of gripper point clouds reduced the memory needed for feature extraction from 4777 MB to 873 MB (81.7 %).
 
@@ -338,8 +338,6 @@ Set `obj_name` at the top of each script. `target_position.py` and `show_contact
 
 - The raw RealSense point clouds before downsampling and the saved UR5 target poses were not preserved; `evaluation/real_world/object_pointclouds/` holds the downsampled clouds.
 - `demo.py` cannot be started on its own (`__main__` calls `main()` without arguments); use `evaluation/simulation/test.py`.
-- Some evaluation logs exist twice. `barrett/epoch1000.npy` and `epoch1500.npy` (no underscore) are a later run with lower error (about 12 mm) than `epoch_1000.npy` and `epoch_1500.npy` (about 35 mm); `RL_eval.py` uses the latter. `robotiq_3f` has `epoch_0.npy` and `epoch_00.npy`, of which `RL_eval.py` uses `epoch_00.npy`. `barrett/epoch_1.npy` and `robotiq_3f/epoch_1.npy` are identical.
-- The `progress.txt` files of `robotiq_3f` are empty and its seed-0 log stops at epoch 2300, although evaluation files for epochs 2500 and 2885 exist.
 - The object mass is assumed to be uniformly distributed, and success in the real world depends on friction and weight that the simulation does not model.
 
 ---

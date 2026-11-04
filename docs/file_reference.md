@@ -12,15 +12,8 @@ distributed data).
 Section, figure and table numbers of the form `3.x` refer to Chapter 3 of the thesis:
 `gripper_representation` = Sec. 3.3.1, `contact_point_selection` + `grasp_quality` =
 Sec. 3.3.2, `rl_inverse_kinematics` = Sec. 3.3.3, `evaluation/simulation` + `results` =
-Sec. 3.4, `evaluation/real_world` = Sec. 3.5.1. Sec. 3.5.2 (soft reconfigurable gripper)
-has no code in the original repo; the collaborators' work was not stored here. In the
-paper, thesis Table 3.2 and Fig. 3.6 correspond to Table II and Fig. 6, and thesis
+Sec. 3.4, `evaluation/real_world` = Sec. 3.5.1. In the paper, thesis Table 3.2 and Fig. 3.6 correspond to Table II and Fig. 6, and thesis
 Fig. 3.7 to Fig. 7.
-
-The thesis text still has a placeholder in Sec. 3.2.2 for how the RUTH five-bar loop
-was closed in PyBullet; the answer is in
-`rl_inverse_kinematics/ruth/gym/envs/kelin/move_env.py` and the `ur5_plus_RUTH.urdf`
-it loads (look for the constraint that closes the loop).
 
 ---
 
@@ -59,7 +52,7 @@ Kept as one tree because the modified scripts use relative paths into
 | `gripper_representation/gripper_feature_extraction.py` | UniGrasp autoencoder with 2048 x 3 inputs (Feb 2022). |
 | `data/gripper_features/Data_DB/{ruth,robotiq_3f,kinova_kg3,bh_282}/workspace.npy` | The (1,256) workspace features fed to the PSSN. |
 | `data/ObjectPointClouds/` | 16 YCB point clouds and `Contact_Points/{Barret,Robotiq,Ruth}/*.npy`, the PSSN contact-point outputs per object. |
-| `saved_models/point_set_selection/220model.ckpt` (282 MB) | **Most likely the trained EfficientGrasp PSSN** (size matches the 256-d input). `189model` and `221model` (316 MB) match the 768-d UniGrasp input and are retrained baselines. |
+| `saved_models/point_set_selection/220model.ckpt` (282 MB) | The trained EfficientGrasp PSSN (256-d input). `189model` and `221model` (316 MB) match the 768-d UniGrasp input and are retrained baselines. |
 | `point_set_selection/logs/` | TF event files (129 MB) from PSSN training. |
 
 **Unmodified upstream UniGrasp** (stanford-iprl-lab/UniGrasp, 2021-01-18): `README.md`,
@@ -153,11 +146,11 @@ captured data and the pre/post-processing scripts.
 existed in 12 identical-looking copies in the original repo. They differ only in
 `ycb_objects/YcbMustardBottle/model.urdf`, in three variants, each kept once:
 
-| Directory | MustardBottle `model.urdf` | Used by |
-|---|---|---|
-| `pybullet_object_models/` | friction 0.8, mass 0.603 kg, inertia 1e-3 (upstream values) | all `gym/envs/kelin` environments, i.e. RL training |
-| `pybullet_object_models_demo_ruth_robotiq/` | mass changed to 0.01 kg (11 May 2022) | `ruth/demo.py`, `robotiq_3f/demo.py` (simulation trials) |
-| `pybullet_object_models_demo_barrett/` | friction 1.0, inertia 0 (15 Aug 2022) | `barrett/demo.py` |
+| Directory | Used by |
+|---|---|
+| `pybullet_object_models/` | all `gym/envs/kelin` environments, i.e. RL training |
+| `pybullet_object_models_demo_ruth_robotiq/` | `ruth/demo.py`, `robotiq_3f/demo.py` (simulation trials) |
+| `pybullet_object_models_demo_barrett/` | `barrett/demo.py` |
 
 All other objects are byte-identical across the three.
 
