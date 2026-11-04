@@ -96,7 +96,7 @@ Files in each gripper directory:
 | `train.py` | SAC training on `gym.make('kelin-v0')`; logs to `log/kelin-v0/seed--N`. |
 | `sac.py`, `model.py`, `replay_memory.py`, `utils_.py`, `utils11.py`, `utils/` | SAC implementation (Gaussian policy, twin Q). Identical in all three directories. |
 | `val.py` | Runs a trained policy for 100 episodes and saves per-episode mean fingertip error as `epochNNNN.npy` in the cwd. Source of the logs in `results/rl_ik_error/`. |
-| `RL_gripper.py` | Loads the trained agent for the demo (`log/kelin-v0/seed--0` in `ruth/` and `robotiq_3f/`, `seed--1` in `barrett/`; absolute path). |
+| `RL_gripper.py` | Loads the trained agent for the demo (`log/kelin-v0/seed--0` in `ruth/` and `robotiq_3f/`, `seed--1` in `barrett/`). |
 | `demo.py` | Full simulation pipeline: loads UR5+gripper and the YCB object, reads PSSN contact points, positions the arm (`move_ur.calc_target_pos`), runs the RL policy, records MP4. |
 | `move_ur.py` (+ `move_ur5_robotiq.py`) | UR5 positioning and the two-step rest-pose computation (Sec. 3.3.3 step one). |
 | `gym/` | Vendored gym 0.14.0 with `envs/kelin/move_env.py` registered as `kelin-v0` (class name `MoveUr5RuthEnv` for all grippers). Holds the URDFs and meshes. |
@@ -119,7 +119,7 @@ Other RL directories:
 | Path | What it is |
 |---|---|
 | `test.py` | Simulation trial driver: 16 YCB objects x 4 orientations (`000`, `pi00`, `pi0pi`, `pipipi`), calls `train_<gripper>/demo.main`. `--gripper {ruth,robotiq,barrett}`. |
-| `RL_eval.py` | Produces the RL-IK error-vs-epoch figure (Fig. 3.7) from `results/rl_ik_error/*/epoch_*.npy` (paths inside still point at the old location, see Known issues). |
+| `RL_eval.py` | Produces the RL-IK error-vs-epoch figure (Fig. 3.7) from `results/rl_ik_error/*/epoch_*.npy`. |
 
 ## results
 

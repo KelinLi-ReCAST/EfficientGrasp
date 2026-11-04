@@ -131,50 +131,43 @@ python -c "import gym; print(gym.__file__)"   # must point into this directory
 
 ### 3.4 Data and models
 
-GitHub holds the code, the URDF/xacro files and a few figures. Everything else is distributed separately on HuggingFace ([KelinLiIC/EfficientGrasp](https://huggingface.co/datasets/KelinLiIC/EfficientGrasp)) and has to be placed at the same paths, because the scripts expect the files there. `.gitignore` encodes this split, so the files are not staged by accident.
+GitHub holds the code, the URDF/xacro files and a few figures. The datasets, trained models, meshes, evaluation logs and videos are on HuggingFace: [KelinLiIC/EfficientGrasp](https://huggingface.co/datasets/KelinLiIC/EfficientGrasp). They sit at the same paths as in this repository, so download them into the clone:
 
-| Path (relative to the repository root) | Contents | Size |
-|---|---|---|
-| `gripper_representation/data/WorkspaceArrays/` | 44 751 fingertip-workspace arrays (autoencoder training set) | 3.8 GB |
-| `gripper_representation/feature_extraction/{coupRotWorkspaceArrays,ruthArrays,saved_models,logs}/` | RUTH and coupled-rotation workspaces, trained autoencoder, TF logs | 175 MB |
-| `contact_point_selection/UniGrasp/data/` | Object point clouds, PSSN contact points, gripper workspace features, UniGrasp labels | 470 MB |
-| `contact_point_selection/UniGrasp/saved_models/` | PSSN checkpoints (`point_set_selection/220model.ckpt` is EfficientGrasp), released UniGrasp models | 1.3 GB |
-| `contact_point_selection/UniGrasp/point_set_selection/logs/` | PSSN training TF events | 130 MB |
-| `grasp_quality/data/`, `grasp_quality/utils/manopth/mano/models/` | DeepSDF weights and MANO models. MANO is licence-restricted: obtain it from [mano.is.tue.mpg.de](https://mano.is.tue.mpg.de) | 280 MB |
-| `rl_inverse_kinematics/<gripper>/log/` | Trained SAC policies | 4.5 GB |
-| `rl_inverse_kinematics/<gripper>/{contact_points,contact_list,ws1}.npy`, `obj_pc/` | RL training targets, object point clouds | 40 MB each |
-| `rl_inverse_kinematics/*/gym/envs/kelin/**/meshes/`, `urdf/**/*.{stl,dae,obj}` | Gripper and UR5 meshes referenced by the URDFs | 350 MB |
-| `third_party/` | [pybullet-object-models](https://github.com/eleramp/pybullet-object-models) (YCB meshes), three variants | 430 MB |
-| `results/rl_ik_error/`, `results/pssn_accuracy/` | Evaluation logs behind Fig. 7, Table II and Fig. 6 of the paper | 1 MB |
-| `results/videos/unigrasp_baseline/` | 128 grasp clips of the UniGrasp baseline | 97 MB |
-| `evaluation/real_world/occlusion/ruth_MustardBottle_*.mp4` | Four simulation clips of the mustard bottle used in the occlusion analysis | 3 MB |
-| `rl_inverse_kinematics/her_baseline_attempt/results and plots/` | DDPG and DQN weights (with and without HER) of the HER baseline attempt | 4 MB |
-| `evaluation/real_world/object_pointclouds/` | 17 RealSense captures, 2048 × 3 | 1 MB |
+```bash
+hf download KelinLiIC/EfficientGrasp --repo-type dataset --local-dir . --exclude README.md .gitattributes
+```
 
-The PSSN is trained on the UniGrasp dataset, which is not redistributed here: download `train_data.tar.gz` and `test_data.tar.gz` from the links in `contact_point_selection/UniGrasp/README.md`.
+The MANO models (`grasp_quality/utils/manopth/mano/models/`) are licence-restricted and are not redistributed: obtain them from [mano.is.tue.mpg.de](https://mano.is.tue.mpg.de).
+
+The PSSN is trained on the UniGrasp dataset, which is not redistributed here either: download `train_data.tar.gz` and `test_data.tar.gz` from the links in `contact_point_selection/UniGrasp/README.md` and extract them to `contact_point_selection/UniGrasp/data/train_data/` and `test_data/`.
 
 `rl_inverse_kinematics/*/pybullet_object_models` are symbolic links into `third_party/`. They are broken until `third_party/` is in place. The three variants differ only in the mass, friction and inertia of the mustard bottle (`docs/file_reference.md`).
 
 ### 3.5 Paths
 
-Unlike the data layout, the scripts have **not** been made relocatable. They still contain absolute paths of the machines they were written on, and the simulation driver imports the gripper packages under their old names. These have to be edited by hand before running:
+The absolute paths of the machines the code was written on have been replaced by paths relative to the repository root, so the scripts run from any location. Each script derives the root from its own location. The changes, from the original path to the new one:
 
-| In the scripts | Replace with |
-|---|---|
-| `/home/kelin/workspace_kelin/RAL-IROS2022/train_ruth` (also `train_robotiq`, `train_barrett`) | `<repo>/rl_inverse_kinematics/ruth` (`robotiq_3f`, `barrett`) |
-| `import train_ruth.demo` etc. in `evaluation/simulation/test.py` | `sys.path` entry for `<repo>/rl_inverse_kinematics/<gripper>` and `import demo` |
-| `/home/kelin/workspace_xian/urdf/ur5_plus_RUTH.urdf` (`ruth/demo.py`) | `<repo>/rl_inverse_kinematics/ruth/gym/envs/kelin/urdf/ur5_plus_RUTH.urdf` |
-| `/home/kelin/workspace_kelin/previous_work/feature_extraction` | `<repo>/gripper_representation/feature_extraction` |
-| `/home/kelin/workspace_kelin/previous_work/WorkspaceArrays` | `<repo>/gripper_representation/data/WorkspaceArrays` |
-| `/home/kelin/Downloads/contact_points`, `contact_points_U` | Folder with the PSSN contact points; the surviving files are in `contact_point_selection/UniGrasp/data/ObjectPointClouds/Contact_Points/` |
-| `/media/robin-lab/Jim/train_data` (`train_pssn.py`) | The extracted UniGrasp training data |
-| `/home/kelin/workspace_kelin/RAL-IROS2022/videos`, `unigrasp_videos` | Any writable folder for the recordings |
+- `/home/kelin/workspace_kelin/RAL-IROS2022/train_ruth` (`train_robotiq`, `train_barrett`) → `rl_inverse_kinematics/ruth` (`robotiq_3f`, `barrett`): URDFs, trained policies in `log/`, `contact_list.npy` and `obj_pc/`.
+- `import train_ruth.demo` (`train_robotiq`, `train_barrett`) in `evaluation/simulation/test.py` → the gripper directory is put on `sys.path` and `demo` is imported from it.
+- `/home/kelin/workspace_xian/urdf/ur5_plus_RUTH.urdf` (`ruth/demo.py`) → `rl_inverse_kinematics/ruth/gym/envs/kelin/urdf/ur5_plus_RUTH.urdf`.
+- `/home/kelin/workspace_kelin/RL_IK`, `RL_IK_2` and `/home/kelin/workspace_xian/RUTH_RL` → the gripper directory of the script (`contact_points.npy`, `contact_list.npy`, `log/`).
+- `/home/kelin/workspace_kelin/previous_work/feature_extraction` and `/home/robin-lab/Kelin/saved_models` → `gripper_representation/feature_extraction` (`saved_models/`, `ruthArrays/`, `fo_t1o_t2o.urdf`).
+- `/home/kelin/workspace_kelin/previous_work/WorkspaceArrays` → `gripper_representation/data/WorkspaceArrays`.
+- `/home/kelin/workspace_xian/meshes/RUTH` (`fo_t1o_t2o.urdf`) → `rl_inverse_kinematics/ruth/gym/envs/kelin/meshes/RUTH`.
+- `/home/robin-lab/Kelin/UniGrasp-master` and `/home/kelin/workspace_kelin/previous_work/UniGrasp` → `contact_point_selection/UniGrasp`.
+- `/media/robin-lab/Jim/train_data`, `test_data` → `contact_point_selection/UniGrasp/data/train_data`, `test_data`.
+- `/home/kelin/Downloads/contact_points` → `contact_point_selection/UniGrasp/data/ObjectPointClouds/Contact_Points/`, read as `Ruth_Ycb<Object>_<ori>.npy` (`ruth/demo.py`, `grasp_quality`).
+- `/home/kelin/Downloads/contact_points_U` → `contact_point_selection/UniGrasp/data/ObjectPointClouds/Contact_Points_UniGrasp/`, read as `Robotiq_Ycb<Object>_<ori>.npy` and `BH_Ycb<Object>_<ori>.npy` (`robotiq_3f/demo.py`, `barrett/demo.py`).
+- `/home/kelin/Downloads/contact_points_revision` → `evaluation/real_world/contact_points/`.
+- `/home/kelin/Downloads/revision_real_pc` → `evaluation/real_world/raw_pointclouds/`.
+- `/home/kelin/Downloads/revision_sparse_real_pc` → `evaluation/real_world/object_pointclouds/`.
+- `/home/kelin/Downloads/target_pos` → `evaluation/real_world/target_poses/`.
+- `/home/kelin/workspace_kelin/RAL-IROS2022/train_<gripper>/epoch_*.npy` (`RL_eval.py`) → `results/rl_ik_error/<gripper>/`.
+- `/home/kelin/workspace_kelin/RAL-IROS2022/videos`, `unigrasp_videos` → `results/videos/efficientgrasp/`, `results/videos/unigrasp_baseline/`, created when the first trial is recorded.
+- `/home/robin-lab/anaconda3/envs/kelin/lib/python3.6/site-packages/tensorflow` (`pointnet4/tf_ops/*/tf_*_compile.sh`) → `TF_ROOT`, taken from the TensorFlow of the active Python environment unless set beforehand.
+- `prefix: /home/kelin/anaconda3/envs/RAL2022` in `environment.yml` → removed; conda uses the environment name.
 
-List every remaining occurrence with:
-
-```bash
-grep -rnE "/home/(kelin|robin-lab)|/media/robin-lab" --include=*.py .
-```
+The UniGrasp files under `contact_point_selection/UniGrasp/gripper_urdf/` and `simulation/` still contain the paths of the UniGrasp authors. They are upstream code and are not called by the steps below.
 
 ---
 
@@ -299,7 +292,7 @@ The `__main__` block evaluates the force-closure term of [Liu et al.](https://ar
 | `top1_f{1,2,3}_index_*.txt`, `scene1.txt` | Top-1 contact point of each finger and the rest of the point cloud, written by `unigrasp.test` into the working directory |
 | `rl_inverse_kinematics/<gripper>/log/kelin-v0/seed--<N>/` | `agent.pkl`, `GaussianPolicy.*.pt`, `QNetwork.*.pt`, `config.json`, `progress.txt` |
 | `epoch_<N>.npy` | Output of `val.py`: mean fingertip error per episode (mm), 100 episodes. The published logs are in `results/rl_ik_error/<gripper>/` |
-| `<gripper>_<Object>_<ori>.mp4` | PyBullet recording of one trial |
+| `results/videos/{efficientgrasp,unigrasp_baseline}/<gripper>_<Object>_<ori>.mp4` | PyBullet recording of one trial |
 
 Results reported in the paper (5 trials per object; a grasp is successful if the object is held for 5 s above the table):
 
@@ -333,9 +326,7 @@ Set `obj_name` at the top of each script. `target_position.py` and `show_contact
 
 ## 7. Known limitations
 
-- The scripts contain absolute paths and old module names and do not run without the edits in §3.5.
-- The scripts read from and write to `~/Downloads/{contact_points, contact_points_U, contact_points_revision, revision_real_pc, revision_sparse_real_pc, target_pos}`. These folders were not preserved. The PSSN contact points survive in `contact_point_selection/UniGrasp/data/ObjectPointClouds/Contact_Points/`; the raw point clouds before downsampling and the saved UR5 target poses were not recovered.
-- `robotiq_3f` and `barrett` load `contact_list.npy` through an absolute path to the old `train_robotiq/` folder (`gym/envs/kelin/move_env.py`). The file is identical in the three gripper directories.
+- The raw RealSense point clouds before downsampling and the saved UR5 target poses were not preserved; `evaluation/real_world/object_pointclouds/` holds the downsampled clouds.
 - `demo.py` cannot be started on its own (`__main__` calls `main()` without arguments); use `evaluation/simulation/test.py`.
 - Some evaluation logs exist twice. `barrett/epoch1000.npy` and `epoch1500.npy` (no underscore) are a later run with lower error (about 12 mm) than `epoch_1000.npy` and `epoch_1500.npy` (about 35 mm); `RL_eval.py` uses the latter. `robotiq_3f` has `epoch_0.npy` and `epoch_00.npy`, of which `RL_eval.py` uses `epoch_00.npy`. `barrett/epoch_1.npy` and `robotiq_3f/epoch_1.npy` are identical.
 - The `progress.txt` files of `robotiq_3f` are empty and its seed-0 log stops at epoch 2300, although evaluation files for epochs 2500 and 2885 exist.
