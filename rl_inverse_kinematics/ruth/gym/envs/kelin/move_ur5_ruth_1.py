@@ -11,6 +11,10 @@
 
 
 
+import os
+HERE = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.abspath(os.path.join(HERE, '..', '..', '..', '..', '..'))
+
 import pybullet as p
 import numpy as np
 import time
@@ -239,7 +243,7 @@ def main(mode, timer):
     if (FixedBase == False):
         floor = p.loadURDF("plane.urdf")
 
-    urdfDirectory = "/home/kelin/workspace_kelin/RAL-IROS2022/demo_and_RL/gym/envs/kelin/urdf/ur5_plus_RUTH.urdf" 
+    urdfDirectory = os.path.join(HERE, 'urdf', 'ur5_plus_RUTH.urdf') 
     robotPos = [0, 0, 0]
     robotScale = 1
     robot = p.loadURDF(urdfDirectory,

@@ -10,8 +10,12 @@
 
 
 
+import os
+HERE = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.abspath(os.path.join(HERE, '..', '..', '..', '..', '..'))
+
 import sys
-sys.path.append('/home/kelin/workspace_kelin/RL_IK_2')
+sys.path.append(os.path.normpath(os.path.join(HERE, '..', '..', '..')))
 from numpy import random
 import pybullet 
 import numpy as np

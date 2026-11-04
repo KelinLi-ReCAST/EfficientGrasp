@@ -1,4 +1,8 @@
 """ Original Author: Haoqiang Fan """
+import os
+HERE = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.abspath(os.path.join(HERE, '..', '..', '..'))
+
 import numpy as np
 import ctypes as ct
 import cv2
@@ -20,7 +24,7 @@ cv2.namedWindow('show3d')
 cv2.moveWindow('show3d',0,0)
 cv2.setMouseCallback('show3d',onmouse)
 
-dll=np.ctypeslib.load_library(os.path.join('/home/kelin/workspace_kelin/previous_work/UniGrasp/point_set_selection/pointnet4/utils', 'render_balls_so.so'),'.')
+dll=np.ctypeslib.load_library(os.path.join(os.path.join(os.path.join(REPO_ROOT, 'contact_point_selection', 'UniGrasp'), 'point_set_selection', 'pointnet4', 'utils'), 'render_balls_so.so'),'.')
 
 def showpoints(xyz,c_gt=None, c_pred = None ,waittime=0,showrot=False,magnifyBlue=0,freezerot=True,background=(255,255,255),normalizecolor=False,ballradius=5):
     global showsz,mousex,mousey,zoom,changed

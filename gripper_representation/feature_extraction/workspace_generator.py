@@ -1,3 +1,7 @@
+import os
+HERE = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
+
 import numpy as np
 import time
 import warnings
@@ -133,14 +137,14 @@ if __name__ == "__main__":
                                             for actu_meth in [0, 1]:  # select actuation method 0=underactutaed, 1=fully-actutaed
                                                 workspace = five_bar_workspace(l1, l2, theta_range, fin_ori_meth, fin_ori_step, phal_num, [phal1], actu_meth)
                                                 count += 1
-                                                np.save('/home/kelin/workspace_kelin/previous_work/WorkspaceArrays/ws'+str(count)+'.npy', workspace)
+                                                np.save(os.path.join(REPO_ROOT, 'gripper_representation', 'data', 'WorkspaceArrays', 'ws')+str(count)+'.npy', workspace)
                                     elif phal_num == 2:
                                         for phal1 in np.arange(0.025, 0.1, 0.025):
                                             for phal2 in np.arange(0.025, 0.1, 0.025):
                                                 for actu_meth in [0, 1]:  # select actuation method 0=underactutaed, 1=fully-actutaed
                                                     workspace = five_bar_workspace(l1, l2, theta_range, fin_ori_meth, fin_ori_step, phal_num, [phal1, phal2], actu_meth)
                                                     count += 1
-                                                    np.save('/home/kelin/workspace_kelin/previous_work/WorkspaceArrays/ws' + str(count) + '.npy', workspace)
+                                                    np.save(os.path.join(REPO_ROOT, 'gripper_representation', 'data', 'WorkspaceArrays', 'ws') + str(count) + '.npy', workspace)
                                     else:
                                         for phal1 in np.arange(0.025, 0.1, 0.025):
                                             for phal2 in np.arange(0.025, 0.1, 0.025):
@@ -148,7 +152,7 @@ if __name__ == "__main__":
                                                     for actu_meth in [0, 1]:  # select actuation method 0=underactutaed, 1=fully-actutaed
                                                         workspace = five_bar_workspace(l1, l2, theta_range, fin_ori_meth, fin_ori_step, phal_num, [phal1, phal2, phal3], actu_meth)
                                                         count += 1
-                                                        np.save('/home/kelin/workspace_kelin/previous_work/WorkspaceArrays/ws' + str(count) + '.npy', workspace)
+                                                        np.save(os.path.join(REPO_ROOT, 'gripper_representation', 'data', 'WorkspaceArrays', 'ws') + str(count) + '.npy', workspace)
 
 #    elif four_bar:
 #        pass

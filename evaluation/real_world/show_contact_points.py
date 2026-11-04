@@ -6,13 +6,17 @@ Created on Sun May  1 14:22:07 2022
 @author: kelin
 """
 
+import os
+HERE = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
+
 from show3d_balls import showpoints
 import numpy as np
 import os
 
 obj_name = 'drill-lay'
-pc = np.load(os.path.join('/home/kelin/Downloads/revision_sparse_real_pc','Ycb'+obj_name+'.npy'))
-contact_points = np.load(os.path.join('/home/kelin/Downloads/contact_points_revision','Ruth_Ycb'+obj_name+'.npy'))
+pc = np.load(os.path.join(os.path.join(REPO_ROOT, 'evaluation', 'real_world', 'object_pointclouds'),'Ycb'+obj_name+'.npy'))
+contact_points = np.load(os.path.join(os.path.join(REPO_ROOT, 'evaluation', 'real_world', 'contact_points'),'Ruth_Ycb'+obj_name+'.npy'))
 pc = pc/1000
 contact_point1 = contact_points[0,:3]/1000+np.array([-0.02,-0.023,0.01])
 contact_point2 = contact_points[0,3:6]/1000+np.array([0.001,0.001,0.001])

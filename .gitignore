@@ -72,3 +72,10 @@ rl_inverse_kinematics/her_baseline_attempt/results and plots/
 !rl_inverse_kinematics/revision_lr_ablation/*.png
 !media/readme/*.png
 !media/readme/*.jpg
+
+# Editor, OS and backup leftovers
+Thumbs.db
+*.blend1
+*.blend2
+*.bk
+*.broken

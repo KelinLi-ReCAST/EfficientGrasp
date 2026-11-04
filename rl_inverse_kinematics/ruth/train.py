@@ -1,4 +1,8 @@
 # LRoS implementation 
+import os
+HERE = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
+
 import joblib
 import numpy as np 
 import torch
@@ -135,7 +139,7 @@ def lros(vis, env, args, logger_kwargs=dict(), save_freq=5):
             # pybullet.removeBody(2)
             reward_history.append(np.mean(reward_ep))
         
-        # history_path = '/home/kelin/workspace_xian/SAC_train/history'
+        # history_path = os.path.join(HERE, 'history')
         # if not epoch % 10:
         #     fname = f'{history_path}/reward_epoch_{epoch}.npy'
         #     np.save(fname, reward_history)

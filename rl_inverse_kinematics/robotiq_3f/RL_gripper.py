@@ -6,6 +6,10 @@ Created on Mon Jan 31 18:46:21 2022
 @author: kelin
 """
 
+import os
+HERE = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
+
 import time
 import joblib
 import os
@@ -35,7 +39,7 @@ def load_envs_agent(fpath, itr='last'):
 
 
 def run_policy():
-    fpath = '/home/kelin/workspace_kelin/RAL-IROS2022/train_robotiq/log/kelin-v0/seed--0'
+    fpath = os.path.join(HERE, 'log', 'kelin-v0', 'seed--0')
     agent = load_envs_agent(fpath)
     return agent
     

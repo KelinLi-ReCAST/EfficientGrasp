@@ -1,6 +1,6 @@
 #/bin/bash
-CUDA_ROOT=/usr/local/cuda-10.1
-TF_ROOT=/home/robin-lab/anaconda3/envs/kelin/lib/python3.6/site-packages/tensorflow
+CUDA_ROOT=${CUDA_ROOT:-/usr/local/cuda-10.1}
+TF_ROOT=${TF_ROOT:-$(python -c "import os, tensorflow as tf; print(os.path.dirname(tf.__file__))")}
 
 ${CUDA_ROOT}/bin/nvcc -std=c++11 -c -o tf_sampling_g.cu.o tf_sampling_g.cu -DGOOGLE_CUDA=1 -x cu -Xcompiler -fPIC
 

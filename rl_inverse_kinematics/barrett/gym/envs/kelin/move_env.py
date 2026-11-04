@@ -11,6 +11,10 @@
 
 
 
+import os
+HERE = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.abspath(os.path.join(HERE, '..', '..', '..', '..', '..'))
+
 from numpy import random
 import pybullet 
 import numpy as np
@@ -396,7 +400,7 @@ class MoveUr5RuthEnv(gym.Env):
     
     def reset_goal(self, goal=None): 
         workspace = np.load('contact_points.npy')
-        a = np.load('/home/kelin/workspace_kelin/RAL-IROS2022/train_robotiq/contact_list.npy')
+        a = np.load(os.path.join(os.path.join(HERE, '..', '..', '..'), 'contact_list.npy'))
         contact_idx = choice(a)
         #np.random.randint(0,len(workspace))
         #print(contact_idx)

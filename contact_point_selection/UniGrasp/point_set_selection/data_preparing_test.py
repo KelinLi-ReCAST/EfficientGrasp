@@ -1,3 +1,7 @@
+import os
+HERE = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.abspath(os.path.join(HERE, '..', '..', '..'))
+
 import sys
 import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -6,7 +10,7 @@ sys.path.append(os.path.join(BASE_DIR,os.pardir))
 from Train_Val_Test import *
 import numpy as np
 np.random.seed(42)
-data_top_dir = os.path.join('/media/robin-lab/Jim/test_data')
+data_top_dir = os.path.join(os.path.join(REPO_ROOT, 'contact_point_selection', 'UniGrasp'), 'data', 'test_data')
 total_ids = []
 
 for line_id in os.listdir(data_top_dir):

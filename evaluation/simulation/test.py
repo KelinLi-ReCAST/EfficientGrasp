@@ -7,9 +7,9 @@ Created on Tue May 10 12:43:52 2022
 """
 
 import sys
-sys.path.append('/home/kelin/workspace_kelin/RAL-IROS2022')
-
 import os
+
+REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
 import argparse
 import pybullet as p
 import numpy as np
@@ -20,15 +20,9 @@ def argsparser():
     return parser.parse_args()
         
 def main(args):
-    if args.gripper == 'ruth':
-        sys.path.append('/home/kelin/workspace_kelin/RAL-IROS2022/'+'train_ruth')
-        import train_ruth.demo as demo
-    elif args.gripper == 'robotiq':
-        sys.path.append('/home/kelin/workspace_kelin/RAL-IROS2022/'+'train_robotiq')
-        import train_robotiq.demo as demo 
-    elif args.gripper == 'barrett':
-        sys.path.append('/home/kelin/workspace_kelin/RAL-IROS2022/'+'train_barrett')
-        import train_barrett.demo as demo
+    gripper_dirs = {'ruth': 'ruth', 'robotiq': 'robotiq_3f', 'barrett': 'barrett'}
+    sys.path.insert(0, os.path.join(REPO_ROOT, 'rl_inverse_kinematics', gripper_dirs[args.gripper]))
+    import demo
       
     idx = ['Banana','ChipsCan', 'CrackerBox', 'FoamBrick', 'GelatinBox', 'Hammer', 'MasterChefCan',
                            'MediumClamp', 'MustardBottle', 'Pear', 'PottedMeatCan', 'PowerDrill', 'Scissors', 'Strawberry',

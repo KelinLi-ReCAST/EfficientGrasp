@@ -5,12 +5,16 @@ Created on Wed Jan 19 15:21:01 2022
 
 @author: kelin
 """
+import os
+HERE = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
+
 import numpy as np
 import open3d as o3d
 from open3d import utility as o3du
 from show3d_balls import showpoints
 
-a=np.load('/home/kelin/workspace_kelin/RL_IK/contact_points.npy')
+a=np.load(os.path.join(HERE, 'contact_points.npy'))
 print(a.shape)
 b=np.zeros((576,9))
 

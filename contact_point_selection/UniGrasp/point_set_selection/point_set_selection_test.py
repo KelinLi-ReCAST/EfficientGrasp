@@ -2,6 +2,10 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import os
+HERE = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.abspath(os.path.join(HERE, '..', '..', '..'))
+
 from sklearn.neighbors import KDTree
 import math
 import time
@@ -37,7 +41,7 @@ sys.path.insert(0,D3VIS_DIR)
 ROOT_DIR = os.path.join(BASE_DIR,'../')
 GRIPPER_TOP_DIR = os.path.join(ROOT_DIR,'data/gripper_features/Data_DB')
 #DATA_TOP_DIR = os.path.join(ROOT_DIR,'data/objects')
-DATA_TOP_DIR = "/media/robin-lab/Jim/test_data"
+DATA_TOP_DIR = os.path.join(os.path.join(REPO_ROOT, 'contact_point_selection', 'UniGrasp'), 'data', 'test_data')
 
 from data_preparing_test import train_val_test_list
 print("train num %d , val num %d , test num %d" % (len(train_val_test_list._train),len(train_val_test_list._val),len(train_val_test_list._test)))

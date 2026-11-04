@@ -1,3 +1,8 @@
+import os
+HERE = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
+VIDEO_DIR = os.path.join(REPO_ROOT, 'results', 'videos', 'unigrasp_baseline')
+
 import os, sys
 currentdir = os.path.dirname(os.path.realpath(__file__))
 parentdir = os.path.dirname(currentdir)
@@ -145,7 +150,7 @@ def main(obj_pos, obj_ori, obj_size, point_nos, depth, rl_step, obj_name,gripper
     p.setAdditionalSearchPath(pybullet_data.getDataPath())  # optionally
     p.setGravity(0, 0, -9.8)
     p.resetDebugVisualizerCamera(cameraDistance=1.2,cameraYaw=45,cameraPitch=-40,cameraTargetPosition=[0.5,0,0])
-    urdf_directory = "/home/kelin/workspace_kelin/RAL-IROS2022/train_barrett/gym/envs/kelin/urdf/ur5_plus_barrett.urdf"
+    urdf_directory = os.path.join(HERE, 'gym', 'envs', 'kelin', 'urdf', 'ur5_plus_barrett.urdf')
     # urdf_root = pybullet_data.getDataPath()
 
     FixedBase = False #if fixed no plane is imported
@@ -168,7 +173,7 @@ def main(obj_pos, obj_ori, obj_size, point_nos, depth, rl_step, obj_name,gripper
     # depth = 0.24
     # rl_step = 1
     # obj_name = 'YcbMustardBottle'
-    contact_points = np.load(os.path.join('/home/kelin/Downloads/contact_points_U','BH_'+'Ycb'+obj_name+'_'+obj_ori+'.npy'))
+    contact_points = np.load(os.path.join(os.path.join(REPO_ROOT, 'contact_point_selection', 'UniGrasp', 'data', 'ObjectPointClouds', 'Contact_Points_UniGrasp'),'BH_'+'Ycb'+obj_name+'_'+obj_ori+'.npy'))
     
 #    p.setCollisionFilterGroupMask(obj, -1, 1, 0)  # Disable object collisions for now
     
@@ -261,7 +266,8 @@ def main(obj_pos, obj_ori, obj_size, point_nos, depth, rl_step, obj_name,gripper
     finger_position = 0
     flag = 1
     ruth_init = [0,0,-0.41]
-    log_id = p.startStateLogging(p.STATE_LOGGING_VIDEO_MP4, "/home/kelin/workspace_kelin/RAL-IROS2022/unigrasp_videos/"+gripper+"_"+obj_name+'_'+obj_ori+".mp4")
+    os.makedirs(VIDEO_DIR, exist_ok=True)
+    log_id = p.startStateLogging(p.STATE_LOGGING_VIDEO_MP4, os.path.join(VIDEO_DIR, '')+gripper+"_"+obj_name+'_'+obj_ori+".mp4")
     agent = RL_gripper.run_policy()
     
     while i<=1000:
@@ -309,7 +315,7 @@ def main(obj_pos, obj_ori, obj_size, point_nos, depth, rl_step, obj_name,gripper
             # pcd6 = pcd6.random_down_sample(sample_rate)
             # #o3d.visualization.draw_geometries([pcd6])  #  Show point cloud of object
             # showpoints(np.asarray(pcd6.points),ballradius=6,freezerot=False)
-            # np.save(os.path.join('/home/kelin/workspace_kelin/RL_IK_2/obj_pc',obj_name+'.npy'),np.asarray(pcd6.points))
+            # np.save(os.path.join(os.path.join(HERE, 'obj_pc'),obj_name+'.npy'),np.asarray(pcd6.points))
             
             # Step 2: PSSN generate contact points on the object
             # contact_point1 = np.array([0.5,0.47,0.043])  # Test points for banana

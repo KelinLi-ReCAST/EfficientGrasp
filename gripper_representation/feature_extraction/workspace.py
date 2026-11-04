@@ -6,6 +6,10 @@ Created on Mon Feb  7 17:45:03 2022
 @author: kelin
 """
 
+import os
+HERE = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
+
 import numpy as np
 import pybullet as p
 import pybullet_data
@@ -95,7 +99,7 @@ def main():
     p.setAdditionalSearchPath(pybullet_data.getDataPath())  # optionally
     p.setGravity(0, 0, -9.8)
 
-    urdf_directory = "/home/kelin/workspace_kelin/previous_work/feature_extraction/fo_t1o_t2o.urdf"
+    urdf_directory = os.path.join(HERE, 'fo_t1o_t2o.urdf')
     # urdf_root = pybullet_data.getDataPath()
 
     FixedBase = False #if fixed no plane is imported

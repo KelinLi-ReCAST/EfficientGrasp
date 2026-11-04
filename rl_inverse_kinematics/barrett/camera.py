@@ -1,3 +1,7 @@
+import os
+HERE = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
+
 import os, sys
 currentdir = os.path.dirname(os.path.realpath(__file__))
 parentdir = os.path.dirname(currentdir)
@@ -137,7 +141,7 @@ def main():
     p.setAdditionalSearchPath(pybullet_data.getDataPath())  # optionally
     p.setGravity(0, 0, -9.8)
 
-    urdf_directory = "/home/kelin/workspace_kelin/RAL-IROS2022/train_barrett/gym/envs/kelin/urdf/ur5_plus_barrett.urdf"
+    urdf_directory = os.path.join(HERE, 'gym', 'envs', 'kelin', 'urdf', 'ur5_plus_barrett.urdf')
     # urdf_root = pybullet_data.getDataPath()
 
     FixedBase = False #if fixed no plane is imported
@@ -160,7 +164,7 @@ def main():
     depth = 0.24
     rl_step = 1
     obj_name = 'YcbMustardBottle'
-    contact_points = np.load(os.path.join('/home/kelin/Downloads/contact_points','Ruth_'+obj_name+'.npy'))
+    contact_points = np.load(os.path.join(os.path.join(REPO_ROOT, 'contact_point_selection', 'UniGrasp', 'data', 'ObjectPointClouds', 'Contact_Points'),'Ruth_'+obj_name+'.npy'))
    
 #    p.setCollisionFilterGroupMask(obj, -1, 1, 0)  # Disable object collisions for now
     
@@ -304,7 +308,7 @@ def main():
             pcd6 = pcd6.random_down_sample(sample_rate)
             #o3d.visualization.draw_geometries([pcd6])  #  Show point cloud of object
             showpoints(np.asarray(pcd6.points),ballradius=6,freezerot=False)
-            np.save(os.path.join('/home/kelin/workspace_kelin/RAL-IROS2022/train_barrett/obj_pc',obj_name+'_pi00.npy'),np.asarray(pcd6.points))
+            np.save(os.path.join(os.path.join(HERE, 'obj_pc'),obj_name+'_pi00.npy'),np.asarray(pcd6.points))
             
             #Step 2: PSSN generate contact points on the object
             

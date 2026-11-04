@@ -6,22 +6,26 @@ Created on Sun Aug  1 00:38:39 2021
 @author: kelin
 """
 
+import os
+HERE = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.abspath(os.path.join(HERE, '..', '..', '..'))
+
 import sys
 import os
 
-# sys.path.append('/home/kelin/Downloads/Pybullet/RUTH_Gripper')
+# sys.path.append(os.path.join(REPO_ROOT, 'rl_inverse_kinematics', 'ruth'))
 # import grasping_with_RUTH2
 import numpy as np
 import unigrasp
 from scipy import io
 
-mat=io.loadmat('/home/robin-lab/Kelin/UniGrasp-master/data/ObjectPointClouds/11.mat')
-ROOT_DIR = "/home/robin-lab/Kelin/UniGrasp-master/data/ObjectPointClouds"
-DIR = "/home/robin-lab/Kelin/UniGrasp-master/data/ObjectPointClouds/"
+mat=io.loadmat(os.path.join(os.path.join(REPO_ROOT, 'contact_point_selection', 'UniGrasp'), 'data', 'ObjectPointClouds', '11.mat'))
+ROOT_DIR = os.path.join(os.path.join(REPO_ROOT, 'contact_point_selection', 'UniGrasp'), 'data', 'ObjectPointClouds')
+DIR = os.path.join(os.path.join(REPO_ROOT, 'contact_point_selection', 'UniGrasp'), 'data', 'ObjectPointClouds', '')
 unigrasp.restore_stage3(220)
 obj_pc_file_list = [line for line in os.listdir(ROOT_DIR) if line.startswith("Ycb")]
 obj_pc = mat['ppp']
-# np.load("/home/robin-lab/Kelin/UniGrasp-master/data/ObjectPointClouds/11.npy")
+# np.load(os.path.join(os.path.join(REPO_ROOT, 'contact_point_selection', 'UniGrasp'), 'data', 'ObjectPointClouds', '11.npy'))
 [p1,p2,p3] = unigrasp.test(0,obj_pc)
 # for idx, env_i in enumerate(obj_pc_file_list):
 #     obj_dir = os.path.join(DIR,env_i)

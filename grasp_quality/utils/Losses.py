@@ -1,3 +1,7 @@
+import os
+HERE = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
+
 import numpy as np
 import torch
 import os
@@ -107,7 +111,7 @@ if __name__ == "__main__":
                     'MediumClamp','MustardBottle','Pear','PottedMeatCan','PowerDrill','Scissors','Strawberry',
                     'TennisBall','TomatoSoupCan']
   for object_name in object_names:  
-    a=np.load(osp.join('/home/kelin/Downloads/contact_points', 'Ruth_Ycb'+f'{object_name}'+'.npy'))
+    a=np.load(osp.join(os.path.join(REPO_ROOT, 'contact_point_selection', 'UniGrasp', 'data', 'ObjectPointClouds', 'Contact_Points'), 'Ruth_Ycb'+f'{object_name}'+'.npy'))
     a=a
     sum = 0
     for i in range(10):
@@ -135,7 +139,7 @@ if __name__ == "__main__":
     #FC.append(object_name) 
     FC.append(tt)
     temp.clear()
-  filename = osp.join('/home/kelin/Downloads/contact_points', 'Robotiq_gq1')
+  filename = osp.join(os.path.join(REPO_ROOT, 'contact_point_selection', 'UniGrasp', 'data', 'ObjectPointClouds', 'Contact_Points'), 'Robotiq_gq1')
   #data_write_csv(filename,FC)
   FC = np.reshape(FC,(16,10))
   np.save(filename,FC)

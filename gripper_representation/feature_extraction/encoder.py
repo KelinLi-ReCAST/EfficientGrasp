@@ -5,6 +5,10 @@ Created on Sun Aug  8 21:36:05 2021
 
 @author: kelin
 """
+import os
+HERE = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
+
 import tensorflow.compat.v1 as tf
 tf.disable_eager_execution()
 import numpy as np
@@ -57,7 +61,7 @@ for idx, env_i in enumerate(in_gripper_file_list):
 in_gripper_tf = tf.placeholder(tf.float32,[None,576,9],'gripper_in')
 gt_gripper_tf = tf.placeholder(tf.float32,[None,576,9],'gripper_gt')
 def restore(epoch):
-  save_top_dir = os.path.join("/home/robin-lab/Kelin/saved_models/workspace")
+  save_top_dir = os.path.join(HERE, 'saved_models', 'workspace')
   ckpt_path = os.path.join(save_top_dir,str(epoch)+'model.ckpt')
   print("restoring from %s" % ckpt_path)
   SAVER.restore(sess, ckpt_path)
@@ -90,7 +94,7 @@ def pc_decoder(inputs,scope=None,reuse=None):
       return pc 
   
 def save_model_stage(epoch):
-  save_top_dir = os.path.join('/home/kelin/workspace_kelin/previous_work/feature_extraction/saved_models',"workspace")
+  save_top_dir = os.path.join(HERE, 'saved_models', 'workspace')
   ckpt_path = os.path.join(save_top_dir,str(epoch)+'model.ckpt')
   if epoch == 0:
     SAVER.save(sess, ckpt_path, write_meta_graph=True)

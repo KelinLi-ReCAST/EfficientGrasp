@@ -10,6 +10,10 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import os
+HERE = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
+
 import tensorflow.compat.v1 as tf
 tf.disable_eager_execution()
 import numpy as np
@@ -97,7 +101,7 @@ sess.run(init_op)
 SAVER = tf.train.Saver(max_to_keep=1000)
 
 def restore(epoch):
-  save_top_dir = os.path.join("/home/kelin/workspace_kelin/previous_work/feature_extraction/saved_models/workspace")
+  save_top_dir = os.path.join(HERE, 'saved_models', 'workspace')
   ckpt_path = os.path.join(save_top_dir,str(epoch)+'model.ckpt')
   print("restoring from %s" % ckpt_path)
   SAVER.restore(sess, ckpt_path)
@@ -181,13 +185,13 @@ if __name__ == "__main__":
   restore(9999)
 
   #### specify the folder path of point clouds of the gripper
-  gripper_dir = "/home/kelin/workspace_kelin/previous_work/feature_extraction/ruthArrays"
+  gripper_dir = os.path.join(HERE, 'ruthArrays')
   gripper_name = "ws"
   test(gripper_dir,gripper_name)
 # import os
 # import tensorflow as tf
 
-# reader = tf.pywrap_tensorflow.NewCheckpointReader('/home/kelin/Downloads/UniGrasp-master/saved_models/workspace/2model.ckpt')
+# reader = tf.pywrap_tensorflow.NewCheckpointReader(os.path.join(HERE, 'saved_models', 'workspace', '2model.ckpt'))
 # var_to_shape_map = reader.get_variable_to_shape_map()
 # for key in var_to_shape_map:
 #     print("tensor_name: ", key)

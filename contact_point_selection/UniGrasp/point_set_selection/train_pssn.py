@@ -2,6 +2,10 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import os
+HERE = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.abspath(os.path.join(HERE, '..', '..', '..'))
+
 import math
 import time
 import tensorflow as tf
@@ -38,7 +42,7 @@ ROOT_DIR = os.path.join(BASE_DIR,'../')
 D3VIS_DIR = os.path.join(ROOT_DIR,'vis_3d')
 sys.path.insert(0,D3VIS_DIR)
 
-DATA_TOP_DIR = os.path.join('/media/robin-lab/Jim/','train_data')
+DATA_TOP_DIR = os.path.join(os.path.join(REPO_ROOT, 'contact_point_selection', 'UniGrasp'), 'data', 'train_data')
 GRIPPER_TOP_DIR = os.path.join(ROOT_DIR,'data/gripper_features/Data_DB')
 
 # from show3d_balls import showpoints
@@ -1101,7 +1105,7 @@ def train(base=0):
       plt.plot(plot_epoch,plot_train_loss_nor)
       plt.title(r'$train\ loss\ nor$')
       plt.show()
-      np.save('/home/robin-lab/Kelin/UniGrasp-master/saved_models/point_set_selection/data.npy',data)  
+      np.save(os.path.join(os.path.join(REPO_ROOT, 'contact_point_selection', 'UniGrasp'), 'saved_models', 'point_set_selection', 'data.npy'),data)  
       save_model_stage3(epoch+1+base)
     
 if __name__ == "__main__":
