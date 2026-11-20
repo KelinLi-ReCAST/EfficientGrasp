@@ -277,7 +277,7 @@ This runs 16 YCB objects at random locations in the PyBullet GUI, and records ea
 1. **Scene.** The UR5 with the gripper is loaded and moved to its start configuration.
 2. **Contact points.** The best-ranked set (`point_nos = 0`) is read for the object.
 3. **Rest pose.** The end effector is placed 0.3 m from the centroid of the contact points, perpendicular to their plane (`move_ur.calc_target_pos`).
-4. **Gripper configuration.** The object is spawned at `[0.5, 0, 0.01]` and the trained policy is applied for `rl_step = 3` steps.
+4. **Gripper configuration.** The object is spawned and the trained policy is applied for `rl_step = 3` steps.
 5. **Grasp.** The arm approaches along the normal by `depth = 0.24` m, the fingers close, and the object is lifted.
 
 The policy is loaded by `RL_gripper.py` from `log/kelin-v0/seed--0` (`ruth`, `robotiq_3f`) or `seed--1` (`barrett`).
