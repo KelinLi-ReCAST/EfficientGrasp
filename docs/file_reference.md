@@ -95,7 +95,7 @@ Files in each gripper directory:
 | `demo.py` | Full simulation pipeline: loads UR5+gripper and the YCB object, reads PSSN contact points, positions the arm (`move_ur.calc_target_pos`), runs the RL policy, records MP4. |
 | `move_ur.py` (+ `move_ur5_robotiq.py`) | UR5 positioning and the two-step rest-pose computation (Sec. 3.3.3 step one). |
 | `gym/` | Vendored gym 0.14.0 with `envs/kelin/move_env.py` registered as `kelin-v0` (class name `MoveUr5RuthEnv` for all grippers). Holds the URDFs and meshes. |
-| `obj_pc/` | Object point clouds (robotiq: 16; barrett: 16 objects in random orientations; ruth: 16 YCB + 17 real-world captures). |
+| `obj_pc/` | Object point clouds (robotiq: 16; barrett: 16 objects at random locations; ruth: 16 YCB + 17 real-world captures). |
 | `contact_points.npy` (485376 x 9), `contact_list.npy`, `ws1.npy` | Training targets / workspace. Identical in all three directories. |
 | `pybullet_object_models` | Symlink into `third_party/`. `ruth/`, `robotiq_3f/` -> `pybullet_object_models_demo_ruth_robotiq`; `barrett/` -> `pybullet_object_models_demo_barrett`; every `gym/envs/kelin/pybullet_object_models` -> `pybullet_object_models`. See *third_party* below. |
 | `barrett/camera.py` | Demo variant with camera capture (May 2022). |
@@ -113,7 +113,7 @@ Other RL directories:
 
 | Path | What it is |
 |---|---|
-| `test.py` | Simulation trial driver: 16 YCB objects in random orientations, calls `train_<gripper>/demo.main`. `--gripper {ruth,robotiq,barrett}`. |
+| `test.py` | Simulation trial driver: 16 YCB objects at random locations, calls `train_<gripper>/demo.main`. `--gripper {ruth,robotiq,barrett}`. |
 | `RL_eval.py` | Produces the RL-IK error-vs-epoch figure (Fig. 3.7) from `results/rl_ik_error/*/epoch_*.npy`. |
 
 ## results
@@ -122,7 +122,7 @@ Other RL directories:
 |---|---|
 | `rl_ik_error/<gripper>/epoch_*.npy` | Per-episode fingertip error (100 episodes) at epochs 0/1/10/100/200/500/1000/1500/2000/2500/2885, written by `val.py`. `.mat` files are MATLAB exports of the same. |
 | `pssn_accuracy/stage{1,2,3}_{acc.npy,ours.mat,unigrasp.mat}` | Per-stage Top-1/Top-10 accuracy of EfficientGrasp vs UniGrasp (Table 3.2, Fig. 3.6). |
-| `videos/unigrasp_baseline/` | 128 MP4s: UniGrasp-baseline contact points, barrett and robotiq x 16 objects in random orientations. |
+| `videos/unigrasp_baseline/` | 128 MP4s: UniGrasp-baseline contact points, barrett and robotiq x 16 objects at random locations. |
 
 ## evaluation/real_world
 
