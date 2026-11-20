@@ -17,9 +17,9 @@ A gripper is described by the workspace of its fingertips instead of a URDF mode
 </p>
 
 <p align="center">
-  <img src="media/readme/sim_ruth_pi00.gif" width="32%" alt="UR5 with the RUTH hand grasping the mustard bottle in simulation">
-  <img src="media/readme/sim_ruth_pi0pi.gif" width="32%" alt="UR5 with the RUTH hand grasping the mustard bottle in simulation">
-  <img src="media/readme/sim_ruth_pipipi.gif" width="32%" alt="UR5 with the RUTH hand grasping the mustard bottle in simulation">
+  <img src="media/readme/sim_ruth_1.gif" width="32%" alt="UR5 with the RUTH hand grasping the mustard bottle in simulation">
+  <img src="media/readme/sim_ruth_2.gif" width="32%" alt="UR5 with the RUTH hand grasping the mustard bottle in simulation">
+  <img src="media/readme/sim_ruth_3.gif" width="32%" alt="UR5 with the RUTH hand grasping the mustard bottle in simulation">
 </p>
 
 *UR5 with the RUTH hand grasping the YCB mustard bottle in PyBullet (3× speed).*
@@ -272,7 +272,7 @@ The command-line arguments of `val.py` are overwritten in its `__main__` block. 
 python evaluation/simulation/test.py --gripper ruth     # or robotiq / barrett
 ```
 
-This runs 16 YCB objects in 4 orientations (`000`, `pi00`, `pi0pi`, `pipipi`) in the PyBullet GUI, and records each one. The contact points are not computed on the fly; they are read from the files written in Step 2, saved under the names and folders listed in §3.5. Every trial calls `demo.main` of the chosen gripper:
+This runs 16 YCB objects in random orientations in the PyBullet GUI, and records each one. The contact points are not computed on the fly; they are read from the files written in Step 2, saved under the names and folders listed in §3.5. Every trial calls `demo.main` of the chosen gripper:
 
 1. **Scene.** The UR5 with the gripper is loaded and moved to its start configuration.
 2. **Contact points.** The best-ranked set (`point_nos = 0`) is read for the object.
